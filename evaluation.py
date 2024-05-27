@@ -43,7 +43,7 @@ def evaluate_generated_file(file_name_without_extension: str, generation_version
     # Start iteration and get all evaluation score to store
     for section_id, section_data in generated_sections.items():
         # Check the section name
-        if section_data["section_name"].lower() == target_sections[section_id]["section_name"].lower():
+        if (section_id in target_sections.keys()) and (section_data["section_name"].lower() == target_sections[section_id]["section_name"].lower()):
             # Get the generation and target text of current section
             generated_data = section_data["generation"]
             target_data = target_sections[section_id]["section_info"]
@@ -75,7 +75,7 @@ def evaluate_generated_file(file_name_without_extension: str, generation_version
 
         else:
             # Skip the section if section structure doesn't fit
-            print(f"The ROUGE Scores of {section_id} is: None\n\n")
+            print(f"The ROUGE Scores of {section_id} is: None")
 
     # calculate the final score for the whole file for each evaluation matrix
     bleu_result['final'] = bleu_total / len(list(bleu_result.keys()))
@@ -92,7 +92,8 @@ def evaluate_generated_file(file_name_without_extension: str, generation_version
     evaluation_matrix['GPT_SELF_EVALUATION'] = gpt_self_evaluation_result
 
     # Save scores
-    with open(f"evaluation_result/version_{generation_version}/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
+    with open(f"evaluation_result/version_{generation_version}/{file_name_without_extension}.json", 'w',
+              encoding='utf-8') as f:
         json.dump(evaluation_matrix, f, indent=4)
 
 
