@@ -38,7 +38,7 @@ async def main():
         logging.warning(
             f"\n\n\n>>>>>>>>>>>>>>>>>>>> Trying to extract data from file: '{file_name_without_extension}' <<<<<<<<<<<<<<<<<<<< {idx}/{len(files)}")
         # Get the correct content of current file
-        with open(f'{content_folder}/{file_name_without_extension}.json', 'r') as f:
+        with open(f'{content_folder}/{file_name_without_extension}.json', 'r', encoding='utf-8') as f:
             file_content = json.load(f)
 
         # Get section ids from content and sort ids in correct order
@@ -167,7 +167,7 @@ async def main():
                 f"---------- PLEASE CHECK THE DATA OF THIS FILE ---------- section not processed {sorted_section_ids}")
 
         # store the file data
-        with open(f'../file/Energy_demand_extract/structure_1/{file_name_without_extension}.json', 'w') as f:
+        with open(f'../file/Energy_demand_extract/structure_1/{file_name_without_extension}.json', 'w', encoding='utf-8') as f:
             json.dump(file_data, f, indent=4)
 
 

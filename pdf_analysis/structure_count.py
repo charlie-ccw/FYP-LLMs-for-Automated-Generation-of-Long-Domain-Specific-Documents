@@ -32,6 +32,6 @@ for file in files:
             structures[value['section_name']] = 1
 
 # Store the structure info
-with open('analysis_json_data/structure_info.json', 'w') as f:
+with open('analysis_json_data/structure_info.json', 'w', encoding='utf-8') as f:
     json.dump(structures, f, indent=4)
 

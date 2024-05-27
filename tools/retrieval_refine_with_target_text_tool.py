@@ -54,7 +54,7 @@ class RetrievalRefineWithTargetTextTool(BaseTool):
                                            json_format=json_format)
         return response
 
-    async def _arun(self, target_text: str, draft_text: str, knowledge_base: str, k_num: int = 6, *args: Any,
+    async def _arun(self, target_text: str, draft_text: str, knowledge_base: str, k_num: int = 1, *args: Any,
                     **kwargs: Any) -> Any:
         """Use the tool asynchronously."""
         retrieval_tool = RetrievalTool()

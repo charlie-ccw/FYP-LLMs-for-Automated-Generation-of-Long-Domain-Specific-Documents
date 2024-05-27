@@ -137,11 +137,11 @@ for folder in folders:
         domain_similarity[folder]['count'] += 1
 
 # Store the domain info
-with open('analysis_json_data/domain_info.json', 'w') as file:
+with open('analysis_json_data/domain_info.json', 'w', encoding='utf-8') as file:
     json.dump(domain_info, file, indent=4)
 
 # Store the similarity analysis
-with open('analysis_json_data/domain_similarity.json', 'w') as file:
+with open('analysis_json_data/domain_similarity.json', 'w', encoding='utf-8') as file:
     json.dump(domain_similarity, file, indent=4)
 
 

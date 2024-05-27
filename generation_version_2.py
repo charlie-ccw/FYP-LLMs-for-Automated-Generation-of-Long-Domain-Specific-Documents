@@ -7,7 +7,7 @@ import asyncio
 import json
 import os
 from langchain_core.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
-from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_core.messages import SystemMessage
 from prompt.prompt_of_generation_with_template_and_key_info import GENERATION_WITH_TEMPLATE_AND_KEY_INFO_SYSTEM, \
     GENERATION_WITH_TEMPLATE_AND_KEY_INFO_PROMPT
 from tools.retrieval_qa_tool import RetrievalQATool
@@ -16,7 +16,7 @@ from util.prompt_based_generation import prompt_based_generation
 
 
 async def generation_version_2(file_name_without_extension: str):
-    print(f">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> {file_name_without_extension} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ")
+    print(f">>>>>>>>>>>>>>> {file_name_without_extension} <<<<<<<<<<<<<<< version 2")
     # Set up the Message Template for generation
     chat_template = ChatPromptTemplate.from_messages(
         [
@@ -109,9 +109,9 @@ async def generation_version_2(file_name_without_extension: str):
                 'generation': generation
             }
 
-        # Write into correct JSON file
-        with open(f"generated_file/version_2/{file_name_without_extension}.json", 'w') as f:
-            json.dump(file_generation, f, indent=4)
+    # Write into correct JSON file
+    with open(f"generated_file/version_2/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
+        json.dump(file_generation, f, indent=4)
 
 
 async def main():
@@ -125,7 +125,7 @@ async def main():
 
     # Asynchronous call for generating tasks for 1 files each time
     files_list = []
-    for idx, test_dataset in enumerate(test_datasets[9:]):
+    for idx, test_dataset in enumerate(test_datasets):
         file_name_without_extension = test_dataset['file_name']
         files_list.append(file_name_without_extension)
 

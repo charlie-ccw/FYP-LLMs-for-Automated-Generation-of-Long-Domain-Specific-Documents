@@ -61,7 +61,7 @@ if __name__ == "__main__":
                 }
 
         # Write into correct JSON file
-        with open(f"generated_file/version_1/{file_name_without_extension}.json", 'w') as f:
+        with open(f"generated_file/version_1/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
             json.dump(file_generation, f, indent=4)
 
 

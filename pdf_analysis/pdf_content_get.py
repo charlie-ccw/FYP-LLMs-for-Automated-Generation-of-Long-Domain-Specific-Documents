@@ -80,6 +80,6 @@ for file in files:
     }
     # Store the correct content for current file
     file_name_without_extension = os.path.splitext(file)[0]
-    with open(f'../file/Energy_demand_content/structure_1/{file_name_without_extension}.json', 'w') as f:
+    with open(f'../file/Energy_demand_content/structure_1/{file_name_without_extension}.json', 'w', encoding='utf-8') as f:
         json.dump(structure_final, f, indent=4)
 
