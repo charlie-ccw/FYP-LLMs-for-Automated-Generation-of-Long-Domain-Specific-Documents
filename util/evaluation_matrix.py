@@ -34,7 +34,7 @@ def calculate_BLEU(generation_text: str, target_text: str) -> float:
     smoothie = SmoothingFunction().method4
 
     bleu_result = sentence_bleu(reference_tokens, candidate_tokens, smoothing_function=smoothie)
-    print(f'bleu_result: {bleu_result}')
+
     return float(bleu_result)
 
 
@@ -51,7 +51,7 @@ def calculate_METEOR(generation_text: str, target_text: str) -> float:
     candidate_tokens = word_tokenize(generation_text)
 
     meteor_result = meteor_score.meteor_score(reference_tokens, candidate_tokens)
-    print(f'meteor_result: {meteor_result}')
+
     return float(meteor_result)
 
 
@@ -67,7 +67,7 @@ def calculate_ROUGE_L(generation_text: str, target_text: str) -> float:
     rouge = Rouge(metrics=['rouge-l'])
 
     rouge_l_result = rouge.get_scores(generation_text, target_text, avg=True)['rouge-l']['f']
-    print(f'rouge_l_result: {rouge_l_result}')
+
     return float(rouge_l_result)
 
 
@@ -87,12 +87,12 @@ def calculate_BLEURT(generation_text: str, target_text: str) -> float:
         outputs = model(**inputs)
 
     bleurt_result = outputs.logits.squeeze().cpu().numpy()
-    print(f'bleurt_result: {bleurt_result}')
+
     return float(bleurt_result)
 
 
 def calculate_GPT_SELF_EVALUATION(generation_text: str, target_text: str,
-                                  template_requirement: str, model_name: str = 'gpt-4o') -> float:
+                                  template_requirement: str, model_name: str = 'gpt-4o') -> dict:
     """
     By leveraging the model's discriminative capabilities, this tool evaluates the generated text,
     providing both the reasoning and corresponding scores.
@@ -114,6 +114,9 @@ def calculate_GPT_SELF_EVALUATION(generation_text: str, target_text: str,
 
     response = prompt_based_generation(prompt=messages, model=model_name, temperature=0.5, json_format=True)
 
-    gpt_self_evaluation_result = response['score']
-    print(f'gpt_self_evaluation_result: {gpt_self_evaluation_result}')
-    return float(gpt_self_evaluation_result)
+    gpt_self_evaluation_result = {
+        'reason': response['reason'],
+        'score': float(response['score'])
+    }
+
+    return gpt_self_evaluation_result
