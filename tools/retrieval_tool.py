@@ -25,6 +25,16 @@ class RetrievalTool(BaseTool):
     description = "useful for when you need to retrieve information from a specified knowledge base"
     args_schema: Type[BaseModel] = RetrievalInput
 
+    def call(self, query: str, knowledge_base: str, k_num: int = 6, *args: Any, **kwargs: Any) -> list[Document]:
+        """
+        call the _run() from outside
+        """
+        return self._run(query=query,
+                         knowledge_base=knowledge_base,
+                         k_num=k_num,
+                         *args,
+                         **kwargs)
+
     def _run(self, query: str, knowledge_base: str, k_num: int = 6, *args: Any, **kwargs: Any) -> list[Document]:
         """
         Use the tool.
@@ -39,6 +49,16 @@ class RetrievalTool(BaseTool):
         # Start to retrieve
         documents = retriever.invoke(query)
         return documents
+
+    async def acall(self, query: str, knowledge_base: str, k_num: int = 6, *args: Any, **kwargs: Any) -> list[Document]:
+        """
+        call the _arun() from outside in Async way
+        """
+        return await self._arun(query=query,
+                                knowledge_base=knowledge_base,
+                                k_num=k_num,
+                                *args,
+                                **kwargs)
 
     async def _arun(self, query: str, knowledge_base: str, k_num: int = 6, *args: Any, **kwargs: Any) -> list[Document]:
         """Use the tool asynchronously."""

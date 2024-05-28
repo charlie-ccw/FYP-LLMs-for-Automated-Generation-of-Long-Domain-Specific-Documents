@@ -55,10 +55,10 @@ async def generation_version_3(file_name_without_extension: str):
             # Check if section name is correct
             if draft_section_name.lower() == target_section_name.lower():
                 # Call refine tool to optimise the draft section text
-                new_generation = await retrieval_refine_with_target_text_tool.ainvoke(
-                    input={'target_text': target_section_text,
-                           'draft_text': draft_section_text,
-                           'knowledge_base': f'version3/{draft_section_name}'})
+                new_generation = await retrieval_refine_with_target_text_tool.acall(
+                    target_text=target_section_text,
+                    draft_text=draft_section_text,
+                    knowledge_base=f'version3/{draft_section_name}')
                 file_generation[section_id] = {
                     'section_name': draft_section_name,
                     'generation': new_generation

@@ -29,6 +29,17 @@ class RetrievalQATool(BaseTool):
     description = "useful for when you need to answer a question based on extra information retrieved from a specified knowledge base"
     args_schema: Type[BaseModel] = RetrievalQAInput
 
+    def call(self, question: str, query: str, knowledge_base: str, k_num: int = 4, *args: Any, **kwargs: Any) -> Any:
+        """
+        call the _run() from outside
+        """
+        return self._run(question=question,
+                         query=query,
+                         knowledge_base=knowledge_base,
+                         k_num=k_num,
+                         *args,
+                         **kwargs)
+
     def _run(self, question: str, query: str, knowledge_base: str, k_num: int = 4, *args: Any, **kwargs: Any) -> Any:
         """
         Use the tool.
@@ -37,7 +48,7 @@ class RetrievalQATool(BaseTool):
         # Get the Retrival Tool to Extract document objects from knowledge base
         retrieval_tool = RetrievalTool()
         # Retrieve relevant content fragments.
-        documents = retrieval_tool.invoke(input={'query': query, 'knowledge_base': knowledge_base, 'k_num': k_num})
+        documents = retrieval_tool.call(query=query, knowledge_base=knowledge_base, k_num=k_num)
         # Format the relevant text for question answer
         documents_text = self.format_documents_info(documents=documents)
 
@@ -60,14 +71,28 @@ class RetrievalQATool(BaseTool):
                                            json_format=json_format)
         return response
 
+    async def acall(self, question: str, query: str, knowledge_base: str, k_num: int = 4, *args: Any,
+                    **kwargs: Any) -> Any:
+        """
+        call the _arun() from outside in Async way
+        """
+        return await self._arun(question=question,
+                                query=query,
+                                knowledge_base=knowledge_base,
+                                k_num=k_num,
+                                *args,
+                                **kwargs)
+
     async def _arun(self, question: str, query: str, knowledge_base: str, k_num: int = 4, *args: Any,
                     **kwargs: Any) -> Any:
         """Use the tool asynchronously."""
         # Get the Retrival Tool to Extract document objects from knowledge base
         retrieval_tool = RetrievalTool()
         # Retrieve relevant content fragments in Async way
-        documents = await retrieval_tool.ainvoke(
-            input={'query': query, 'knowledge_base': knowledge_base, 'k_num': k_num})
+        documents = await retrieval_tool.acall(
+            query=query,
+            knowledge_base=knowledge_base,
+            k_num=k_num)
         # Format the relevant text for question answer
         documents_text = self.format_documents_info(documents=documents)
 

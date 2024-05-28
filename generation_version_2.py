@@ -63,11 +63,11 @@ async def generation_version_2(file_name_without_extension: str):
                 # start to retrieve key info
                 while 1:
                     try:
-                        answer = await retrieval_qa_tool.ainvoke(input={
-                            'question': question,
-                            'query': query,
-                            'knowledge_base': f"version2/{file_name_without_extension}"
-                        })
+                        answer = await retrieval_qa_tool.acall(
+                            question=question,
+                            query=query,
+                            knowledge_base=f"version2/{file_name_without_extension}"
+                        )
                         break
                     except Exception as e:
                         print(e)

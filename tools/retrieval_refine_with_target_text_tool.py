@@ -28,6 +28,18 @@ class RetrievalRefineWithTargetTextTool(BaseTool):
     description = "useful for when you need to refine a text based on example text retrieved from a specified knowledge base using target text"
     args_schema: Type[BaseModel] = RetrievalRefineWithTargetTextInput
 
+    def call(self, target_text: str, draft_text: str, knowledge_base: str, k_num: int = 1, *args: Any,
+             **kwargs: Any) -> Any:
+        """
+        call the _run() from outside
+        """
+        return self._run(target_text=target_text,
+                         draft_text=draft_text,
+                         knowledge_base=knowledge_base,
+                         k_num=k_num,
+                         *args,
+                         **kwargs)
+
     def _run(self, target_text: str, draft_text: str, knowledge_base: str, k_num: int = 1, *args: Any,
              **kwargs: Any) -> Any:
         """
@@ -35,8 +47,10 @@ class RetrievalRefineWithTargetTextTool(BaseTool):
         To answer a question by retrieving extra knowledge
         """
         retrieval_tool = RetrievalTool()
-        documents = retrieval_tool.invoke(
-            input={'query': target_text, 'knowledge_base': knowledge_base, 'k_num': k_num})
+        documents = retrieval_tool.call(
+            query=target_text,
+            knowledge_base=knowledge_base,
+            k_num=k_num)
         documents_text = self.format_documents_info(documents=documents)
 
         human_prompt = kwargs.get('prompt', RETRIEVAL_REFINE_WITH_TARGET_TEXT_TOOL_PROMPT)
@@ -55,12 +69,26 @@ class RetrievalRefineWithTargetTextTool(BaseTool):
                                            json_format=json_format)
         return response
 
+    async def acall(self, target_text: str, draft_text: str, knowledge_base: str, k_num: int = 1, *args: Any,
+                    **kwargs: Any) -> Any:
+        """
+        call the _arun() from outside in Async way
+        """
+        return await self._arun(target_text=target_text,
+                                draft_text=draft_text,
+                                knowledge_base=knowledge_base,
+                                k_num=k_num,
+                                *args,
+                                **kwargs)
+
     async def _arun(self, target_text: str, draft_text: str, knowledge_base: str, k_num: int = 1, *args: Any,
                     **kwargs: Any) -> Any:
         """Use the tool asynchronously."""
         retrieval_tool = RetrievalTool()
-        documents = await retrieval_tool.ainvoke(
-            input={'query': target_text, 'knowledge_base': knowledge_base, 'k_num': k_num})
+        documents = await retrieval_tool.acall(
+            query=target_text,
+            knowledge_base=knowledge_base,
+            k_num=k_num)
         documents_text = self.format_documents_info(documents=documents)
 
         human_prompt = kwargs.get('prompt', RETRIEVAL_REFINE_WITH_TARGET_TEXT_TOOL_PROMPT)
