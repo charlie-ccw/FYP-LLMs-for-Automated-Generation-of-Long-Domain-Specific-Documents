@@ -63,10 +63,17 @@ async def generation_version_3(file_name_without_extension: str):
             # Check if section name is correct
             if draft_section_name.lower() == target_section_name.lower():
                 # Call refine tool to optimise the draft section text
-                new_generation = await retrieval_refine_with_target_text_tool.acall(
-                    target_text=target_section_text,
-                    draft_text=draft_section_text,
-                    knowledge_base=f'version3/{draft_section_name}')
+                while 1:
+                    try:
+                        new_generation = await retrieval_refine_with_target_text_tool.acall(
+                            target_text=target_section_text,
+                            draft_text=draft_section_text,
+                            knowledge_base=f'version3/{draft_section_name}')
+                        break
+
+                    except Exception as e:
+                        print(e)
+
                 file_generation[section_id] = {
                     'section_name': draft_section_name,
                     'generation': new_generation['optimised_text']
@@ -132,13 +139,13 @@ async def main():
     # Get the test files with summary
     test_datasets = train_test_datasets['test']
 
-    # Asynchronous call for generating tasks for 9 files each time
+    # Asynchronous call for generating tasks for 5 files each time
     files_list = []
     for idx, test_dataset in enumerate(test_datasets):
         file_name_without_extension = test_dataset['file_name']
         files_list.append(file_name_without_extension)
 
-        if len(files_list) == 9:
+        if len(files_list) == 5:
             tasks = [generation_version_3(file_name) for file_name in files_list]
             await asyncio.gather(*tasks)
             files_list = []
