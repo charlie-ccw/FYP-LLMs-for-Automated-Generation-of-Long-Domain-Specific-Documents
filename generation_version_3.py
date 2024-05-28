@@ -55,7 +55,7 @@ async def generation_version_3(file_name_without_extension: str):
             # Check if section name is correct
             if draft_section_name.lower() == target_section_name.lower():
                 # Call refine tool to optimise the draft section text
-                new_generation = retrieval_refine_with_target_text_tool.ainvoke(
+                new_generation = await retrieval_refine_with_target_text_tool.ainvoke(
                     input={'target_text': target_section_text,
                            'draft_text': draft_section_text,
                            'knowledge_base': f'version3/{draft_section_name}'})
@@ -96,17 +96,17 @@ def build_the_train_knowledge_bases(train_files: list[str]):
             train_datas = json.load(f)
         # Store each section info into specific item of sections_knowledge
         for section_id, section_info in train_datas.items():
-            sections_knowledge[section_info['section_nam']].append(Document(
+            sections_knowledge[section_info['section_name']].append(Document(
                 page_content=section_info['section_info'],
                 metadata={'source': train_file}
             ))
 
-        # Get the ChromaDB Tool
-        chroma_db_tool = ChromaDBUtil()
-        # Start iteration and build knowledge base for each section
-        for section_name, documents in sections_knowledge.items():
-            chroma_db_tool.initialise_vectorstore_with_documents(persist_directory=f"version3/{section_name}",
-                                                                 documents=documents)
+    # Get the ChromaDB Tool
+    chroma_db_tool = ChromaDBUtil()
+    # Start iteration and build knowledge base for each section
+    for section_name, documents in sections_knowledge.items():
+        chroma_db_tool.initialise_vectorstore_with_documents(persist_directory=f"version3/{section_name}",
+                                                             documents=documents)
 
 
 async def main():
