@@ -48,6 +48,14 @@ async def generation_version_3(file_name_without_extension: str):
             draft_section_name = draft_file[section_id]['section_name']
             draft_section_text = draft_file[section_id]['generation']
 
+            # Jump to next section if original file does not contain current section
+            if section_id not in target_file.keys():
+                file_generation[section_id] = {
+                    'section_name': draft_section_name,
+                    'generation': draft_section_text
+                }
+                continue
+
             # Get the target section name and sample text for current section
             target_section_name = target_file[section_id]['section_name']
             target_section_text = target_file[section_id]['section_info']
@@ -61,7 +69,7 @@ async def generation_version_3(file_name_without_extension: str):
                     knowledge_base=f'version3/{draft_section_name}')
                 file_generation[section_id] = {
                     'section_name': draft_section_name,
-                    'generation': new_generation
+                    'generation': new_generation['optimised_text']
                 }
             else:
                 file_generation[section_id] = {
@@ -124,13 +132,13 @@ async def main():
     # Get the test files with summary
     test_datasets = train_test_datasets['test']
 
-    # Asynchronous call for generating tasks for 3 files each time
+    # Asynchronous call for generating tasks for 9 files each time
     files_list = []
     for idx, test_dataset in enumerate(test_datasets):
         file_name_without_extension = test_dataset['file_name']
         files_list.append(file_name_without_extension)
 
-        if len(files_list) == 3:
+        if len(files_list) == 9:
             tasks = [generation_version_3(file_name) for file_name in files_list]
             await asyncio.gather(*tasks)
             files_list = []
