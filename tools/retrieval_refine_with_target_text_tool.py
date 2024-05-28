@@ -1,6 +1,7 @@
 from typing import Type, Any
 from langchain.pydantic_v1 import BaseModel, Field
 from langchain.tools import BaseTool
+from langchain_core.documents import Document
 from langchain_core.messages import SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 from prompt.prompt_of_retrieval_refine_with_target_text_tool import RETRIEVAL_REFINE_WITH_TARGET_TEXT_TOOL_PROMPT, \
@@ -77,3 +78,10 @@ class RetrievalRefineWithTargetTextTool(BaseTool):
         response = await aprompt_based_generation(prompt=prompt, model='gpt-3.5-turbo', temperature=0.5,
                                                   json_format=json_format)
         return response
+
+    @staticmethod
+    def format_documents_info(documents: list[Document]) -> str:
+        format_text = ""
+        for document in documents:
+            format_text += f"{document.page_content}\n"
+        return format_text
