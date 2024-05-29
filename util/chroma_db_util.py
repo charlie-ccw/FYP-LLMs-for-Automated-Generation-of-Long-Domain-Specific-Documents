@@ -52,7 +52,7 @@ class ChromaDBUtil:
                                             persist_directory=persist_directory)
         return vectorstore
 
-    def initialise_vectorstore_with_files(self, persist_directory: str, files: list[str], need_resort: bool = False) -> Chroma:
+    def initialise_vectorstore_with_files(self, persist_directory: str, files: list[str]) -> Chroma:
         """
         To intialise a new vectorstore using files
         :param persist_directory: your vectorstore/knowledge name
@@ -66,22 +66,13 @@ class ChromaDBUtil:
             # Load the info from your pdf file
             loader = PyMuPDFLoader(file)
             data = loader.load()
-            # Need to add extra index for your file data
-            if need_resort:
-                text = ""
-                for document in data:
-                    text += document.page_content
-                texts = self.text_splitter.split_text(text)
-                for i, text in enumerate(texts):
-                    documents.append(Document(page_content=text, metadata={"source": file, "index": i}))
-            else:
-                documents.extend(data)
+            documents.extend(data)
         # Create an object for your chroma vectorstore using documents created by files
         vectorstore = self.initialise_vectorstore_with_documents(persist_directory=persist_directory, documents=documents)
 
         return vectorstore
 
-    def load_file_to_vectorstore(self, persist_directory: str, files: list[str], need_resort: bool = False):
+    def load_file_to_vectorstore(self, persist_directory: str, files: list[str]):
         """
         To add more files into existing vectorstore
         :param persist_directory: your vectorstore/knowledge name
@@ -95,16 +86,7 @@ class ChromaDBUtil:
             # Load the info from your pdf file
             loader = PyMuPDFLoader(file)
             data = loader.load()
-            # Need to add extra index for your file data
-            if need_resort:
-                text = ""
-                for document in data:
-                    text += document.page_content
-                texts = self.text_splitter.split_text(text)
-                for i, text in enumerate(texts):
-                    documents.append(Document(page_content=text, metadata={"source": file, "index": i}))
-            else:
-                documents.extend(data)
+            documents.extend(data)
         # Add the new Document objects into your vectorstore
         self.load_documents_to_vectorstore(persist_directory=persist_directory, documents=documents)
 
