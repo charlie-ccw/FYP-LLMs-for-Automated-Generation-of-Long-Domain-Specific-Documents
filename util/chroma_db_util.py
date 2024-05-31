@@ -57,7 +57,6 @@ class ChromaDBUtil:
         To intialise a new vectorstore using files
         :param persist_directory: your vectorstore/knowledge name
         :param files: a list of file path (PDF)
-        :param need_resort: Do you need to resort the pdf data by adding extra index, useful when you need to use Resort RetrievalTool
         :return: Chroma vectorstore
         """
         documents = []
@@ -77,7 +76,6 @@ class ChromaDBUtil:
         To add more files into existing vectorstore
         :param persist_directory: your vectorstore/knowledge name
         :param files: a list of file path (PDF)
-        :param need_resort: Do you need to resort the pdf data by adding extra index, useful when you need to use Resort RetrievalTool
         :return: Chroma vectorstore
         """
         documents = []
