@@ -12,7 +12,7 @@ from prompt.prompt_of_generation_with_template_and_key_info import GENERATION_WI
     GENERATION_WITH_TEMPLATE_AND_KEY_INFO_PROMPT
 from tools.retrieval_qa_tool import RetrievalQATool
 from util.chroma_db_util import ChromaDBUtil
-from util.prompt_based_generation import prompt_based_generation
+from util.prompt_based_generation import aprompt_based_generation
 
 
 async def generation_version_2(file_name_without_extension: str):
@@ -96,7 +96,7 @@ async def generation_version_2(file_name_without_extension: str):
             # Call the model for generating
             while 1:
                 try:
-                    response = prompt_based_generation(prompt=messages, model='gpt-3.5-turbo', temperature=0.5)
+                    response = await aprompt_based_generation(prompt=messages, model='gpt-3.5-turbo', temperature=0.5)
                     break
                 except Exception as e:
                     print(e)
