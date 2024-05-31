@@ -152,11 +152,40 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
             # Get compressed content using llm
             compressed_doc_content = prompt_based_generation(prompt=multi_query_prompt,
                                                              model=model,
-                                                             temperature=0.5,
-                                                             json_format=True)
-            # Store compressed parent document
-            compressed_parent_documents.append(Document(page_content=compressed_doc_content,
-                                                        metadata=parent_document.metadata))
+                                                             temperature=0.5)
+
+            # Check if llm find any relevant context
+            if not compressed_doc_content.content.lower() == 'NO OUTPUT STRING'.lower():
+                # Store compressed parent document
+                compressed_parent_documents.append(Document(page_content=compressed_doc_content.content,
+                                                            metadata=parent_document.metadata))
+        return compressed_parent_documents
+
+    @staticmethod
+    async def aget_compressed_parent_documents(sorted_parent_documents: list[Document],
+                                               question: str, model: str) -> list[Document]:
+        # Set up the message template for contextual compression
+        multi_query_template = ChatPromptTemplate.from_messages(
+            [
+                SystemMessage(content=CONTEXTUAL_COMPRESSION_SYSTEM),
+                HumanMessagePromptTemplate.from_template(CONTEXTUAL_COMPRESSION_PROMPT),
+            ]
+        )
+
+        compressed_parent_documents = []
+        # Build the whole multi query prompt and Get compressed content using llm
+        tasks = [aprompt_based_generation(prompt=multi_query_template.format_messages(question=question,
+                                                                                      context=parent_document.page_content),
+                                          model=model,
+                                          temperature=0.5) for parent_document in sorted_parent_documents]
+        compressed_doc_contents = await asyncio.gather(*tasks)
+
+        for i, compressed_doc_content in enumerate(compressed_doc_contents):
+            # Check if llm find any relevant context
+            if not compressed_doc_content.content.lower() == 'NO OUTPUT STRING'.lower():
+                # Store compressed parent document
+                compressed_parent_documents.append(Document(page_content=compressed_doc_content.content,
+                                                            metadata=sorted_parent_documents[i].metadata))
         return compressed_parent_documents
 
     @staticmethod
@@ -280,7 +309,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
                                                                    parent_documents_with_importance=parent_documents_with_importance)
 
         # Contextual Compression for Parent Documents
-        compressed_parent_documents = self.get_compressed_parent_documents(
+        compressed_parent_documents = await self.aget_compressed_parent_documents(
             sorted_parent_documents=sorted_parent_documents,
             question=question, model=model)
 
