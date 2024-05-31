@@ -1,5 +1,5 @@
 """
-This tool can retrieve relevant fragments from an external knowledge base based on the query you input.
+This tool can retrieve relevant fragments from an external knowledge_base based on the query you input.
 """
 from typing import Type, Any
 from langchain.pydantic_v1 import BaseModel, Field
@@ -45,7 +45,10 @@ class RetrievalTool(BaseTool):
         # Get Vector store
         vectorstore = chroma_util.load_vectorstore(persist_directory=knowledge_base)
         # Get retriever for retrieval task
-        retriever = vectorstore.as_retriever(search_kwargs={"k": k_num})
+        score_threshold = kwargs.get('score_threshold', 0.1)
+        retriever = vectorstore.as_retriever(search_type="similarity_score_threshold",
+                                             search_kwargs={"score_threshold": score_threshold,
+                                                            "k": k_num})
         # Start to retrieve
         documents = retriever.invoke(query)
         return documents
@@ -67,7 +70,10 @@ class RetrievalTool(BaseTool):
         # Get Vector store
         vectorstore = chroma_util.load_vectorstore(persist_directory=knowledge_base)
         # Get retriever for retrieval task
-        retriever = vectorstore.as_retriever(search_kwargs={"k": k_num})
+        score_threshold = kwargs.get('score_threshold', 0.1)
+        retriever = vectorstore.as_retriever(search_type="similarity_score_threshold",
+                                             search_kwargs={"score_threshold": score_threshold,
+                                                            "k": k_num})
         # Start to retrieve
         documents = await retriever.ainvoke(query)
         return documents

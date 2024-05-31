@@ -295,7 +295,8 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
         # Retrieve relevent documents for each query in Async way
         tasks = [retrieval_tool.acall(query=query,
                                       knowledge_base=knowledge_base,
-                                      k_num=k_num) for query in multi_query]
+                                      k_num=k_num,
+                                      score_threshold=0.65) for query in multi_query]
         documents_list = await asyncio.gather(*tasks)
 
         # Get common documents using documents_list
