@@ -66,7 +66,7 @@ def calculate_ROUGE_L(generation_text: str, target_text: str) -> float:
     """
     rouge = Rouge(metrics=['rouge-l'])
 
-    rouge_l_result = rouge.get_scores(generation_text, target_text, avg=True)['rouge-l']['f']
+    rouge_l_result = rouge.get_scores(generation_text, target_text, avg=True)['rouge-l']['r']
 
     return float(rouge_l_result)
 
