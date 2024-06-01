@@ -7,12 +7,6 @@ from prompt.prompt_of_template_to_key_table import TEMPLATE_TO_KEY_TABLE_SYSTEM,
 from util.prompt_based_generation import prompt_based_generation
 
 
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
-os.environ["LANGCHAIN_PROJECT"] = f"FYP"
-os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
-os.environ["LANGCHAIN_API_KEY"] = "ls__27fd43c65bc54f018bac4761a7d5deb0"
-
-
 chat_template = ChatPromptTemplate.from_messages(
     [
         SystemMessage(content=TEMPLATE_TO_KEY_TABLE_SYSTEM),
