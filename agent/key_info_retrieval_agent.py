@@ -18,6 +18,6 @@ def get_key_info_retrieval_agent(temperature: float = 0.5):
     agent = create_openai_tools_agent(llm, tools, prompt)
 
     # Create an agent executor by passing in the agent and tools
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    agent_executor = AgentExecutor(agent=agent, tools=tools)
 
     return agent_executor
