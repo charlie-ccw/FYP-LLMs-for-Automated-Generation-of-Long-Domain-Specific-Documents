@@ -2,7 +2,7 @@ import asyncio
 import json
 import os
 import time
-
+os.environ["OPENAI_API_KEY"] = "sk-proj-5qQ4ZDDhELDbmSYWmgxXT3BlbkFJr29eBbRCNQwrtN3Ka0Qa"
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_core.documents import Document
 from langchain_core.messages import SystemMessage
@@ -40,12 +40,21 @@ async def generation_version_4(file_name_without_extension: str):
     retrieval_qa_with_llm_and_resort_tool = RetrievalQAWithLLMAndResortTool()
     build_version_4_knowledge_base(file_name_without_extension=file_name_without_extension)
 
+    # Get generation in the past
+    if os.path.isfile(f"generated_file/version_4/{file_name_without_extension}.json"):
+        with open(f"generated_file/version_4/{file_name_without_extension}.json", 'r', encoding='utf-8') as f:
+            file_generation = json.load(f)
+    else:
+        file_generation = {}
+
     # Generation start
-    file_generation = {}
     for chapter_id, chapter_template in doc_template.items():
         chapter_name = chapter_template["name"]
         sections_template = chapter_template["sections"]
         for section_id, section_template in sections_template.items():
+            print(f"{file_name_without_extension} --- {chapter_id} --- {section_id}")
+            if section_id in file_generation.keys():
+                continue
             section_name = section_template["name"]
             section_description = section_template["description"]
 
@@ -93,7 +102,7 @@ async def generation_version_4(file_name_without_extension: str):
             # Call the model for generating
             while 1:
                 try:
-                    response = await aprompt_based_generation(prompt=messages, model='gpt-3.5-turbo', temperature=0.5)
+                    response = await aprompt_based_generation(prompt=messages, temperature=0.5)
                     break
                 except Exception as e:
                     print(e)
@@ -106,12 +115,15 @@ async def generation_version_4(file_name_without_extension: str):
                 'genetation': generation
             }
 
-    # Write into correct JSON file
-    with open(f"generated_file/version_4/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
-        json.dump(file_generation, f, indent=4)
+            # Write into correct JSON file every section
+            with open(f"generated_file/version_4/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
+                json.dump(file_generation, f, indent=4)
 
 
 def build_version_4_knowledge_base(file_name_without_extension: str):
+    if os.path.isdir(f"vectorDB/chromaDB/version4/parent/{file_name_without_extension}"):
+        return
+    print(f"No knowledge base, start to build one for {file_name_without_extension}")
     # Set up the origin file path
     file_path = os.path.join("file/Energy_demand/structure_1", f"{file_name_without_extension}.pdf")
     # Create pdfloader to extract info from pdf
@@ -177,11 +189,11 @@ async def main():
 
     # Asynchronous call for generating tasks for 1 files each time
     files_list = []
-    for idx, test_dataset in enumerate(test_datasets):
+    for idx, test_dataset in enumerate(test_datasets[0:5]):
         file_name_without_extension = test_dataset['file_name']
         files_list.append(file_name_without_extension)
 
-        if len(files_list) == 1:
+        if len(files_list) == 5:
             tasks = [generation_version_4(file_name) for file_name in files_list]
             await asyncio.gather(*tasks)
             files_list = []

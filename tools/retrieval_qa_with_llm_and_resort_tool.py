@@ -10,6 +10,7 @@ from langchain_core.messages import SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 from langchain_core.documents import Document
 
+from globalParameter.parameters import MODEL
 from prompt.prompt_of_contextual_compression import CONTEXTUAL_COMPRESSION_SYSTEM, CONTEXTUAL_COMPRESSION_PROMPT
 from prompt.prompt_of_multi_query import MULTI_QUERY_SYSTEM, MULTI_QUERY_PROMPT
 from prompt.prompt_of_retrieval_qa_tool import RETRIEVAL_QA_TOOL_PROMPT, RETRIEVAL_QA_TOOL_SYSTEM
@@ -96,7 +97,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
         return importance_dict
 
     @staticmethod
-    def get_multi_query(question: str, model: str) -> list[str]:
+    def get_multi_query(question: str) -> list[str]:
         # Set up the message template for multi query generation
         multi_query_template = ChatPromptTemplate.from_messages(
             [
@@ -107,7 +108,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
         # Build the whole multi query prompt
         multi_query_prompt = multi_query_template.format_messages(question=question)
         # Get multi queries using llm
-        response = prompt_based_generation(prompt=multi_query_prompt, model=model,
+        response = prompt_based_generation(prompt=multi_query_prompt, model=MODEL,
                                            temperature=0.5, json_format=True)
         # Format multi queries
         multi_query = []
@@ -135,7 +136,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
 
     @staticmethod
     def get_compressed_parent_documents(sorted_parent_documents: list[Document],
-                                        question: str, model: str) -> list[Document]:
+                                        question: str) -> list[Document]:
         # Set up the message template for contextual compression
         multi_query_template = ChatPromptTemplate.from_messages(
             [
@@ -151,7 +152,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
                                                                       context=parent_document.page_content)
             # Get compressed content using llm
             compressed_doc_content = prompt_based_generation(prompt=multi_query_prompt,
-                                                             model=model,
+                                                             model=MODEL,
                                                              temperature=0.5)
 
             # Check if llm find any relevant context
@@ -163,7 +164,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
 
     @staticmethod
     async def aget_compressed_parent_documents(sorted_parent_documents: list[Document],
-                                               question: str, model: str) -> list[Document]:
+                                               question: str) -> list[Document]:
         # Set up the message template for contextual compression
         multi_query_template = ChatPromptTemplate.from_messages(
             [
@@ -176,7 +177,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
         # Build the whole multi query prompt and Get compressed content using llm
         tasks = [aprompt_based_generation(prompt=multi_query_template.format_messages(question=question,
                                                                                       context=parent_document.page_content),
-                                          model=model,
+                                          model=MODEL,
                                           temperature=0.5) for parent_document in sorted_parent_documents]
         compressed_doc_contents = await asyncio.gather(*tasks)
 
@@ -216,14 +217,14 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
                          *args,
                          **kwargs)
 
-    def _run(self, question: str, knowledge_base: str, k_num: int = 20, model: str = 'gpt-3.5-turbo',
+    def _run(self, question: str, knowledge_base: str, k_num: int = 20,
              *args: Any, **kwargs: Any) -> Any:
         """
         Use the tool.
         To answer a question by retrieving extra knowledge
         """
         # Multi Query Set Up
-        multi_query = self.get_multi_query(question=question, model=model)
+        multi_query = self.get_multi_query(question=question)
 
         # Get the Retrival Tool to Extract document objects from knowledge base
         retrieval_tool = RetrievalTool()
@@ -246,7 +247,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
 
         # Contextual Compression for Parent Documents
         compressed_parent_documents = self.get_compressed_parent_documents(sorted_parent_documents=sorted_parent_documents,
-                                                                           question=question, model=model)
+                                                                           question=question)
 
         # Long-Context Reorder
         reordered_parent_documents = self.reorder_documents(compressed_parent_documents=compressed_parent_documents)
@@ -269,7 +270,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
         # Format the whole Message Prompt using input variables
         prompt = chat_template.format_messages(**prompt_parameter)
         # Call the Model API for Queation Answer Task
-        response = prompt_based_generation(prompt=prompt, model=model, temperature=0.5,
+        response = prompt_based_generation(prompt=prompt, model=MODEL, temperature=0.5,
                                            json_format=json_format)
         return response
 
@@ -284,11 +285,11 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
                                 *args,
                                 **kwargs)
 
-    async def _arun(self, question: str, knowledge_base: str, k_num: int = 20, model: str = 'gpt-3.5-turbo',
+    async def _arun(self, question: str, knowledge_base: str, k_num: int = 20,
                     *args: Any, **kwargs: Any) -> Any:
         """Use the tool asynchronously."""
         # Multi Query Set Up
-        multi_query = self.get_multi_query(question=question, model=model)
+        multi_query = self.get_multi_query(question=question)
 
         # Get the Retrival Tool to Extract document objects from knowledge base
         retrieval_tool = RetrievalTool()
@@ -296,7 +297,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
         tasks = [retrieval_tool.acall(query=query,
                                       knowledge_base=knowledge_base,
                                       k_num=k_num,
-                                      score_threshold=0.65) for query in multi_query]
+                                      score_threshold=0.6) for query in multi_query]
         documents_list = await asyncio.gather(*tasks)
 
         # Get common documents using documents_list
@@ -312,7 +313,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
         # Contextual Compression for Parent Documents
         compressed_parent_documents = await self.aget_compressed_parent_documents(
             sorted_parent_documents=sorted_parent_documents,
-            question=question, model=model)
+            question=question)
 
         # Long-Context Reorder
         reordered_parent_documents = self.reorder_documents(compressed_parent_documents=compressed_parent_documents)
@@ -335,7 +336,7 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
         # Format the whole Message Prompt using input variables
         prompt = chat_template.format_messages(**prompt_parameter)
         # Call the Model API for Queation Answer Task in Async way
-        response = await aprompt_based_generation(prompt=prompt, model=model, temperature=0.5,
+        response = await aprompt_based_generation(prompt=prompt, model=MODEL, temperature=0.5,
                                                   json_format=json_format)
         return response
 

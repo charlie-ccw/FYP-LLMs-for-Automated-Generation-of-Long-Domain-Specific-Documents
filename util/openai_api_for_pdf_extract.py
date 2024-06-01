@@ -20,7 +20,7 @@ def encode_image(image_path):
 
 
 async def aget_openai_response(messages, section_id: str, section_name: str,
-                               model: str = "gpt-3.5-turbo", temperature: float = 0.5,
+                               model: str = "gpt-4o", temperature: float = 0.5,
                                json_format: bool = False, retry_num: int = 0):
     """
     To Extract info of picture based on your message prompt and return in JSON format

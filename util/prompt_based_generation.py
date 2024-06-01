@@ -1,8 +1,9 @@
 from langchain_openai import ChatOpenAI
 from globalParameter import parameters
+from globalParameter.parameters import MODEL
 
 
-def prompt_based_generation(prompt, model: str, temperature: float, json_format: bool = False):
+def prompt_based_generation(prompt, temperature: float, json_format: bool = False, model: str = MODEL):
     """
     Call model to answer your question
     :param prompt: Your complete prompt
@@ -21,7 +22,7 @@ def prompt_based_generation(prompt, model: str, temperature: float, json_format:
     return response
 
 
-async def aprompt_based_generation(prompt, model: str, temperature: float, json_format: bool = False):
+async def aprompt_based_generation(prompt, temperature: float, json_format: bool = False, model: str = MODEL):
     """
     Call model to answer your question in Async way
     :param prompt: Your complete prompt

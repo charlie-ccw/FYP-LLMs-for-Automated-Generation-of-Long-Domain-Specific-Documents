@@ -96,7 +96,7 @@ async def generation_version_2(file_name_without_extension: str):
             # Call the model for generating
             while 1:
                 try:
-                    response = await aprompt_based_generation(prompt=messages, model='gpt-3.5-turbo', temperature=0.5)
+                    response = await aprompt_based_generation(prompt=messages, temperature=0.5)
                     break
                 except Exception as e:
                     print(e)

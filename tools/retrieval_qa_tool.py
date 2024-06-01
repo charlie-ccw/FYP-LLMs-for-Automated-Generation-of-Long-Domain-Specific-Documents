@@ -7,6 +7,8 @@ from langchain.tools import BaseTool
 from langchain_core.messages import SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 from langchain_core.documents import Document
+
+from globalParameter.parameters import MODEL
 from prompt.prompt_of_retrieval_qa_tool import RETRIEVAL_QA_TOOL_PROMPT, RETRIEVAL_QA_TOOL_SYSTEM
 from tools.retrieval_tool import RetrievalTool
 from util.prompt_based_generation import prompt_based_generation, aprompt_based_generation
@@ -67,7 +69,7 @@ class RetrievalQATool(BaseTool):
         # Format the whole Message Prompt using input variables
         prompt = chat_template.format_messages(**prompt_parameter)
         # Call the Model API for Queation Answer Task
-        response = prompt_based_generation(prompt=prompt, model='gpt-3.5-turbo', temperature=0.5,
+        response = prompt_based_generation(prompt=prompt, model=MODEL, temperature=0.5,
                                            json_format=json_format)
         return response
 
@@ -111,7 +113,7 @@ class RetrievalQATool(BaseTool):
         # Format the whole Message Prompt using input variables
         prompt = chat_template.format_messages(**prompt_parameter)
         # Call the Model API for Queation Answer Task in Async way
-        response = await aprompt_based_generation(prompt=prompt, model='gpt-3.5-turbo', temperature=0.5,
+        response = await aprompt_based_generation(prompt=prompt, model=MODEL, temperature=0.5,
                                                   json_format=json_format)
         return response
 

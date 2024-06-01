@@ -48,7 +48,7 @@ if __name__ == "__main__":
                 # Call the model for generating
                 while 1:
                     try:
-                        response = prompt_based_generation(prompt=messages, model='gpt-3.5-turbo', temperature=0.5)
+                        response = prompt_based_generation(prompt=messages, temperature=0.5)
                         break
                     except Exception as e:
                         print(e)

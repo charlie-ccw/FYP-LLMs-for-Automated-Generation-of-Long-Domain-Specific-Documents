@@ -76,7 +76,7 @@ NOTE: You need to extract key questions as many as possible and use tool to do r
             # Call the model for generating
             while 1:
                 try:
-                    response = await aprompt_based_generation(prompt=messages, model='gpt-3.5-turbo', temperature=0.5)
+                    response = await aprompt_based_generation(prompt=messages, temperature=0.5)
                     break
                 except Exception as e:
                     print(e)

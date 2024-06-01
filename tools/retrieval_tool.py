@@ -45,7 +45,7 @@ class RetrievalTool(BaseTool):
         # Get Vector store
         vectorstore = chroma_util.load_vectorstore(persist_directory=knowledge_base)
         # Get retriever for retrieval task
-        score_threshold = kwargs.get('score_threshold', 0.1)
+        score_threshold = kwargs.get('score_threshold', 0.5)
         retriever = vectorstore.as_retriever(search_type="similarity_score_threshold",
                                              search_kwargs={"score_threshold": score_threshold,
                                                             "k": k_num})
@@ -70,7 +70,7 @@ class RetrievalTool(BaseTool):
         # Get Vector store
         vectorstore = chroma_util.load_vectorstore(persist_directory=knowledge_base)
         # Get retriever for retrieval task
-        score_threshold = kwargs.get('score_threshold', 0.1)
+        score_threshold = kwargs.get('score_threshold', 0.5)
         retriever = vectorstore.as_retriever(search_type="similarity_score_threshold",
                                              search_kwargs={"score_threshold": score_threshold,
                                                             "k": k_num})

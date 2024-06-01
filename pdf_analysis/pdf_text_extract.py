@@ -106,8 +106,7 @@ async def main():
                     tasks.append(aget_openai_response(section_id=sections_ids_in_messages[messages_id],
                                                       section_name=file_content[sections_ids_in_messages[messages_id]][
                                                           'section_name'],
-                                                      messages=messages, model="gpt-4o",
-                                                      temperature=0.5, json_format=True, retry_num=1))
+                                                      messages=messages, temperature=0.5, json_format=True, retry_num=1))
                 # Get responses
                 responses = await asyncio.gather(*tasks)
                 # Check the format of response and add them into logging if error happens
@@ -133,8 +132,7 @@ async def main():
                 tasks.append(aget_openai_response(section_id=sections_ids_in_messages[messages_id],
                                                   section_name=file_content[sections_ids_in_messages[messages_id]][
                                                       'section_name'],
-                                                  messages=messages, model="gpt-4o",
-                                                  temperature=0.5, json_format=True, retry_num=1))
+                                                  messages=messages, temperature=0.5, json_format=True, retry_num=1))
             responses = await asyncio.gather(*tasks)
             for response in responses:
                 if len(list(response.keys())) > 1:

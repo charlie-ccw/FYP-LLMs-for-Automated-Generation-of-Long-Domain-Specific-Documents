@@ -4,6 +4,8 @@ from langchain.tools import BaseTool
 from langchain_core.documents import Document
 from langchain_core.messages import SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
+
+from globalParameter.parameters import MODEL
 from prompt.prompt_of_retrieval_refine_with_target_text_tool import RETRIEVAL_REFINE_WITH_TARGET_TEXT_TOOL_PROMPT, \
     RETRIEVAL_REFINE_WITH_TARGET_TEXT_TOOL_SYSTEM
 from tools.retrieval_tool import RetrievalTool
@@ -65,7 +67,7 @@ class RetrievalRefineWithTargetTextTool(BaseTool):
         )
         prompt = chat_template.format_messages(**prompt_parameter)
 
-        response = prompt_based_generation(prompt=prompt, model='gpt-3.5-turbo', temperature=0.5,
+        response = prompt_based_generation(prompt=prompt, model=MODEL, temperature=0.5,
                                            json_format=json_format)
         return response
 
@@ -103,7 +105,7 @@ class RetrievalRefineWithTargetTextTool(BaseTool):
         )
         prompt = chat_template.format_messages(**prompt_parameter)
 
-        response = await aprompt_based_generation(prompt=prompt, model='gpt-3.5-turbo', temperature=0.5,
+        response = await aprompt_based_generation(prompt=prompt, model=MODEL, temperature=0.5,
                                                   json_format=json_format)
         return response
 
