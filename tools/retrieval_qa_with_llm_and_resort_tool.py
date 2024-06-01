@@ -233,7 +233,8 @@ class RetrievalQAWithLLMAndResortTool(BaseTool):
         for query in multi_query:
             documents_list.append(retrieval_tool.call(query=query,
                                                       knowledge_base=knowledge_base,
-                                                      k_num=k_num))
+                                                      k_num=k_num,
+                                                      score_threshold=0.6))
 
         # Get common documents using documents_list
         common_documents = self.get_common_documents(documents_list=documents_list)
