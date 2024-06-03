@@ -14,7 +14,7 @@ chat_template = ChatPromptTemplate.from_messages(
     ]
 )
 
-template_file_path = "../project_template/template_version_1.json"
+template_file_path = "project_template/template_version_1.json"
 with open(template_file_path, 'r', encoding='utf-8') as f:
     doc_template = json.load(f)
 
@@ -45,7 +45,7 @@ for chapter_id, chapter_template in doc_template.items():
 
 
 file_name_without_extension = os.path.splitext(os.path.basename(template_file_path))[0]
-with open(f"../project_template/{file_name_without_extension}_detailed_table.json", 'w', encoding='utf-8') as f:
+with open(f"project_template/{file_name_without_extension}_detailed_table.json", 'w', encoding='utf-8') as f:
     json.dump(detailed_table, f, indent=4)
 
 
