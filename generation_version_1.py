@@ -2,6 +2,8 @@
 This is version 1 of the system, which generates overall documents by using the analyzed template requirements and a simple summary of the files.
 """
 import json
+import os
+
 from langchain_core.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 from langchain_core.messages import SystemMessage
 from prompt.prompt_of_generation_with_template_only import GENERATION_WITH_TEMPLATE_ONLY_SYSTEM, GENERATION_WITH_TEMPLATE_ONLY_PROMPT
@@ -61,6 +63,9 @@ if __name__ == "__main__":
                 }
 
         # Write into correct JSON file
+        if not os.path.isdir("generated_file/version_1"):
+            os.makedirs("generated_file/version_1")
+
         with open(f"generated_file/version_1/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
             json.dump(file_generation, f, indent=4)
 
