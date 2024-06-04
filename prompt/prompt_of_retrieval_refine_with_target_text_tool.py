@@ -14,6 +14,6 @@ DRAFT TEXT:
 
 respond in JSON format:
 {{
-    "optimised_text": "the text after optimisation."
+    "optimised_text": "the text after optimisation. In string format"
 }}"""
 
