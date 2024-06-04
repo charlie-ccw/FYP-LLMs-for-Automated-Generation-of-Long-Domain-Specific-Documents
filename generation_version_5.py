@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+import time
 
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_core.documents import Document
@@ -16,7 +17,7 @@ from util.prompt_based_generation import aprompt_based_generation
 
 
 async def generation_version_5(file_name_without_extension: str):
-    print(f">>>>>>>>>>>>>>> {file_name_without_extension} <<<<<<<<<<<<<<< version 4")
+    print(f">>>>>>>>>>>>>>> {file_name_without_extension} <<<<<<<<<<<<<<< version 5")
     # Set up the Message Template for generation
     chat_template = ChatPromptTemplate.from_messages(
         [
@@ -62,16 +63,22 @@ Template Requirement:
 NOTE: You need to extract key questions as many as possible and use tool to do retrieval question and answering for getting full key infos. There is only one knowledge base: 'version5/child/{file_name_without_extension}'"""
 
             # Get section key info using Agent
-            while 1:
-                try:
-                    agent_result = await key_info_retrieval_agent.ainvoke({'input': agent_input_prompt})
-                    section_key_info = agent_result['output']
-                    break
-                except Exception as e:
-                    print(e)
+            try:
+                agent_result = await key_info_retrieval_agent.ainvoke({'input': agent_input_prompt})
+                section_key_info = agent_result['output']
+            except Exception as e:
+                print(f"FIRST TRY: {e}")
+                while 1:
+                    try:
+                        agent_result = key_info_retrieval_agent.invoke({'input': agent_input_prompt})
+                        section_key_info = agent_result['output']
+                        break
+                    except Exception as e2:
+                        print(f"SECOND TRY: {e2}")
+                        time.sleep(60)
 
             # Format the whole messages with input varibales using template
-            messages = chat_template.format_messages(section_requirement=section_description, key_info=section_key_info)
+            messages = chat_template.format_messages(section_requirement=f"{section_name}\n{section_description}", key_info=section_key_info)
 
             # Call the model for generating
             while 1:
@@ -86,7 +93,7 @@ NOTE: You need to extract key questions as many as possible and use tool to do r
             # Store the generation with section id and name info
             file_generation[section_id] = {
                 'section_name': section_name,
-                'genetation': generation
+                'generation': generation
             }
 
             # Write into correct JSON file every section
@@ -145,7 +152,7 @@ def build_version_5_knowledge_base(file_name_without_extension: str):
                 }
             ))
 
-    # Set up the knowledge for parent and child documents of version4
+    # Set up the knowledge for parent and child documents of version5
     chroma_db_util = ChromaDBUtil()
     chroma_db_util.initialise_vectorstore_with_documents(persist_directory=f"version5/parent/{file_name_without_extension}",
                                                          documents=parent_documents)
