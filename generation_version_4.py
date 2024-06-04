@@ -1,8 +1,7 @@
 import asyncio
 import json
 import os
-import time
-os.environ["OPENAI_API_KEY"] = "sk-proj-5qQ4ZDDhELDbmSYWmgxXT3BlbkFJr29eBbRCNQwrtN3Ka0Qa"
+
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_core.documents import Document
 from langchain_core.messages import SystemMessage
@@ -76,7 +75,6 @@ async def generation_version_4(file_name_without_extension: str):
                         break
                     except Exception as e:
                         print(e)
-                        time.sleep(30)
 
                 # Check if the model can find correct answer
                 if answer['find_answer_in_extracted_part'].lower() == 'YES'.lower():
@@ -112,7 +110,7 @@ async def generation_version_4(file_name_without_extension: str):
             # Store the generation with section id and name info
             file_generation[section_id] = {
                 'section_name': section_name,
-                'genetation': generation
+                'generation': generation
             }
 
             # Write into correct JSON file every section
@@ -189,7 +187,7 @@ async def main():
 
     # Asynchronous call for generating tasks for 1 files each time
     files_list = []
-    for idx, test_dataset in enumerate(test_datasets[0:5]):
+    for idx, test_dataset in enumerate(test_datasets):
         file_name_without_extension = test_dataset['file_name']
         files_list.append(file_name_without_extension)
 
