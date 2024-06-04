@@ -21,6 +21,8 @@ def check_generated_structure(file: str):
     for section_id, generated_section in generated_sections.items():
         sections.remove(section_id)
         section_names.remove(generated_section['section_name'])
+        if not isinstance(generated_section['generation'], str):
+            print(f"{file} ---------- {section_id} NOT STRING")
 
     if len(sections) > 0 or len(section_names) > 0:
         print(f"{file} ---------- HAVEN NOT DONE")
