@@ -137,8 +137,7 @@ def build_the_train_knowledge_bases(train_files: list[str]):
 
 async def main():
     base_version = '6'
-    if not os.path.isdir(f"generated_file/version_3_{base_version}"):
-        os.mkdir(f"generated_file/version_3_{base_version}")
+    os.makedirs(f"generated_file/version_3_{base_version}", exist_ok=True)
     # Load the train and test files with summary
     train_test_file_path = "project_template/template_version_1_summary.json"
     with open(train_test_file_path, 'r', encoding='utf-8') as f:
