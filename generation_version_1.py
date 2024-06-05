@@ -10,6 +10,8 @@ from prompt.prompt_of_generation_with_template_only import GENERATION_WITH_TEMPL
 from util.prompt_based_generation import prompt_based_generation
 
 if __name__ == "__main__":
+    os.makedirs("generated_file/version_1", exist_ok=True)
+
     # Set up the Message Template for generation
     chat_template = ChatPromptTemplate.from_messages(
         [
@@ -63,9 +65,6 @@ if __name__ == "__main__":
                 }
 
         # Write into correct JSON file
-        if not os.path.isdir("generated_file/version_1"):
-            os.makedirs("generated_file/version_1")
-
         with open(f"generated_file/version_1/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
             json.dump(file_generation, f, indent=4)
 
