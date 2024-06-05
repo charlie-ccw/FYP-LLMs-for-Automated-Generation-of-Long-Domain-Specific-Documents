@@ -115,6 +115,8 @@ async def generation_version_2(file_name_without_extension: str):
 
 
 async def main():
+    os.makedirs("generated_file/version_2", exist_ok=True)
+
     # Load the train and test files with summary
     train_test_file_path = "project_template/template_version_1_summary.json"
     with open(train_test_file_path, 'r', encoding='utf-8') as f:
