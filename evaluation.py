@@ -121,9 +121,6 @@ async def evaluate_generated_file(file_name_without_extension: str, generation_v
     evaluation_matrix['EMBEDDING_SIMILARITY_OF_COSINE'] = embedding_similarity_of_cosine_result
     evaluation_matrix['GPT_SELF_EVALUATION'] = gpt_self_evaluation_result
 
-    if not os.path.isdir(f"evaluation_result/version_{generation_version}"):
-        os.mkdir(f"evaluation_result/version_{generation_version}")
-
     # Save scores
     with open(f"evaluation_result/version_{generation_version}/{file_name_without_extension}.json", 'w',
               encoding='utf-8') as f:
@@ -143,6 +140,7 @@ async def main():
     generation_versions = ['1', '2', '4', '5', '6', '3_1', '3_2', '3_4', '3_5', '3_6']
 
     for generation_version in generation_versions:
+        os.makedirs(f"evaluation_result/version_{generation_version}", exist_ok=True)
         print(
             f"============================================================ {generation_version} ============================================================")
         tasks = []
