@@ -1,0 +1,363 @@
+{
+    "BLEU": {
+        "1.1": 0.002755678026345239,
+        "1.2": 0.010270101913886493,
+        "1.3": 0.05001518757864192,
+        "1.4": 0.021509181773301543,
+        "1.5": 0.06363161725529902,
+        "1.6": 0.005699907734587362,
+        "1.7": 0.10025553603232977,
+        "1.8": 0.0729845689425675,
+        "1.9": 0.012527533887979433,
+        "1.10": 0.031381968897716606,
+        "1.11": 0.0017199756698652458,
+        "1.12": 0.005775806088691695,
+        "1.13": 1.9872420667080654e-09,
+        "1.14": 0.03571535214394523,
+        "1.15": 0.034722783339507575,
+        "1.16": 0.004051201060058435,
+        "2.1": 0.003332556513224266,
+        "2.2": 0.002454051977668124,
+        "2.3": 0.001280101654886626,
+        "2.4": 0.00324902047792358,
+        "2.5": 0.0,
+        "3.1": 0.058775037120142266,
+        "3.2": 0.006218187484335189,
+        "3.3": 0.03813564366442536,
+        "3.4": 0.02346325122418676,
+        "3.5": 0.013953997091158753,
+        "3.6": 0.001389922424820253,
+        "4.1": 0.004038078914708756,
+        "4.2": 0.016501503781967294,
+        "4.3": 0.0020827075472900406,
+        "4.4": 0.025459124602501916,
+        "5.1": 0.021248253183003482,
+        "5.2": 0.03939003728511873,
+        "5.3": 0.8827916928185874,
+        "final": 0.04696410500287982
+    },
+    "METEOR": {
+        "1.1": 0.0896718073774832,
+        "1.2": 0.2493984874159166,
+        "1.3": 0.2880699347591178,
+        "1.4": 0.22731249539527,
+        "1.5": 0.37831050228310503,
+        "1.6": 0.16547227574525333,
+        "1.7": 0.43144296116028363,
+        "1.8": 0.2629487093047892,
+        "1.9": 0.24841662384378208,
+        "1.10": 0.24192105536196457,
+        "1.11": 0.07874015748031495,
+        "1.12": 0.05255044843049327,
+        "1.13": 0.02092075569022373,
+        "1.14": 0.2610369633223635,
+        "1.15": 0.44199979537597284,
+        "1.16": 0.146484375,
+        "2.1": 0.16705259382114052,
+        "2.2": 0.09375000000000003,
+        "2.3": 0.08412197686645637,
+        "2.4": 0.24629337769605703,
+        "2.5": 0.0,
+        "3.1": 0.36390142198622,
+        "3.2": 0.08799012040753318,
+        "3.3": 0.2619280457795524,
+        "3.4": 0.23306795245570763,
+        "3.5": 0.197968822129896,
+        "3.6": 0.08156606851549757,
+        "4.1": 0.12114586094177933,
+        "4.2": 0.19344935296742533,
+        "4.3": 0.0841908325537886,
+        "4.4": 0.2349196901798231,
+        "5.1": 0.23600970617827305,
+        "5.2": 0.40767123287671236,
+        "5.3": 0.9373611111111111,
+        "final": 0.22403192689450904
+    },
+    "METEOR_OF_SUMMARY": {
+        "1.1": 0.21102816809223782,
+        "1.2": 0.2703536411928634,
+        "1.3": 0.2794501708157458,
+        "1.4": 0.2697062552831784,
+        "1.5": 0.4204279350250545,
+        "1.6": 0.19496855345911948,
+        "1.7": 0.41701137804475424,
+        "1.8": 0.19477281812125247,
+        "1.9": 0.30620503597122306,
+        "1.10": 0.39724600532167714,
+        "1.11": 0.14846747359429205,
+        "1.12": 0.1193087385486756,
+        "1.13": 0.2301838380320739,
+        "1.14": 0.2384462761137879,
+        "1.15": 0.5488727590622536,
+        "1.16": 0.18789929287959112,
+        "2.1": 0.1747108436561562,
+        "2.2": 0.17562980752083504,
+        "2.3": 0.14285714285714288,
+        "2.4": 0.3821426566097064,
+        "2.5": 0.09557945041816011,
+        "3.1": 0.23312764777169326,
+        "3.2": 0.1662511930829263,
+        "3.3": 0.3804421280146646,
+        "3.4": 0.3357963409804371,
+        "3.5": 0.43499608415903734,
+        "3.6": 0.15665796344647523,
+        "4.1": 0.2426232813932172,
+        "4.2": 0.2878340898763204,
+        "4.3": 0.24152150125259733,
+        "4.4": 0.3054245449153461,
+        "5.1": 0.30513112884834664,
+        "5.2": 0.2742986540513024,
+        "5.3": 0.7797191380543376,
+        "final": 0.2808556451901907
+    },
+    "ROUGE_1": {
+        "1.1": 0.20114942188965684,
+        "1.2": 0.19867549292224032,
+        "1.3": 0.24867724494051122,
+        "1.4": 0.18947367967645443,
+        "1.5": 0.24043715505389832,
+        "1.6": 0.08641974924554202,
+        "1.7": 0.33207546745347105,
+        "1.8": 0.2616033707589596,
+        "1.9": 0.2105263111357342,
+        "1.10": 0.3502824810495069,
+        "1.11": 0.1060070629634533,
+        "1.12": 0.14117646591712127,
+        "1.13": 0.09222886210038941,
+        "1.14": 0.2336448548868898,
+        "1.15": 0.30088495141044724,
+        "1.16": 0.1117318397838708,
+        "2.1": 0.08571428360228578,
+        "2.2": 0.06006005837152473,
+        "2.3": 0.06611570049689235,
+        "2.4": 0.17054263314704649,
+        "2.5": 0.0,
+        "3.1": 0.2754490994212772,
+        "3.2": 0.09027777417052484,
+        "3.3": 0.22222221857422228,
+        "3.4": 0.15019762655189117,
+        "3.5": 0.10975609599940514,
+        "3.6": 0.05319148816659124,
+        "4.1": 0.06763284783215485,
+        "4.2": 0.12941176314550176,
+        "4.3": 0.06993006810773149,
+        "4.4": 0.19559901859984102,
+        "5.1": 0.1484098921534793,
+        "5.2": 0.22499999537812512,
+        "5.3": 0.8965517191379312,
+        "final": 0.18591343217778156
+    },
+    "ROUGE_L": {
+        "1.1": 0.18965516901609364,
+        "1.2": 0.158940393584492,
+        "1.3": 0.22751322377649005,
+        "1.4": 0.16842104809750705,
+        "1.5": 0.24043715505389832,
+        "1.6": 0.08641974924554202,
+        "1.7": 0.30943395801950874,
+        "1.8": 0.23628691506275712,
+        "1.9": 0.19736841639889208,
+        "1.10": 0.29378530590826396,
+        "1.11": 0.1060070629634533,
+        "1.12": 0.14117646591712127,
+        "1.13": 0.08710503631046627,
+        "1.14": 0.20093457451305805,
+        "1.15": 0.28318583636619943,
+        "1.16": 0.1005586554263289,
+        "2.1": 0.07999999788800007,
+        "2.2": 0.06006005837152473,
+        "2.3": 0.06611570049689235,
+        "2.4": 0.139534881209062,
+        "2.5": 0.0,
+        "3.1": 0.2754490994212772,
+        "3.2": 0.08680555194830261,
+        "3.3": 0.22222221857422228,
+        "3.4": 0.15019762655189117,
+        "3.5": 0.10975609599940514,
+        "3.6": 0.04255319029425083,
+        "4.1": 0.06763284783215485,
+        "4.2": 0.12352941020432529,
+        "4.3": 0.06993006810773149,
+        "4.4": 0.17114914084922977,
+        "5.1": 0.1484098921534793,
+        "5.2": 0.1999999953781251,
+        "5.3": 0.8965517191379312,
+        "final": 0.1746213664728787
+    },
+    "EMBEDDING_SIMILARITY_OF_COSINE": {
+        "1.1": 0.9384160118154529,
+        "1.2": 0.8332359754037217,
+        "1.3": 0.867869826883196,
+        "1.4": 0.8845237227827687,
+        "1.5": 0.9046786886337298,
+        "1.6": 0.8400747122703146,
+        "1.7": 0.9396230553937115,
+        "1.8": 0.9288150576496632,
+        "1.9": 0.9011853887820749,
+        "1.10": 0.933210556155674,
+        "1.11": 0.9021193186488405,
+        "1.12": 0.901875686347212,
+        "1.13": 0.8719242989582849,
+        "1.14": 0.8303047871855724,
+        "1.15": 0.9126420477592346,
+        "1.16": 0.7773910482374127,
+        "2.1": 0.8391958400126663,
+        "2.2": 0.7260604265656739,
+        "2.3": 0.7520144914180666,
+        "2.4": 0.8866676834337287,
+        "2.5": 0.7159822052802616,
+        "3.1": 0.9072620120785927,
+        "3.2": 0.7778419858097673,
+        "3.3": 0.9320104315424906,
+        "3.4": 0.7840764166050709,
+        "3.5": 0.810933590909585,
+        "3.6": 0.8106109424242613,
+        "4.1": 0.7554231593615787,
+        "4.2": 0.8031825396900382,
+        "4.3": 0.7596848402888678,
+        "4.4": 0.875734322613838,
+        "5.1": 0.8214976598097985,
+        "5.2": 0.8854793438719283,
+        "5.3": 0.9940621346844335,
+        "final": 0.8531061826266917
+    },
+    "GPT_SELF_EVALUATION": {
+        "1.1": {
+            "reason": "The generated text provides a clear and concise summary of the project, covering most of the key points from the target text. However, it lacks some specific details and depth found in the target text. Here is a breakdown of the evaluation based on the four aspects:\n\n1. Fluency: The generated text is fluent and easy to read, with clear structure and logical flow. However, some sections are too brief and lack the detail present in the target text.\n\n2. Grammar: The grammar in the generated text is correct with no noticeable errors.\n\n3. Key Content: While the generated text captures the main ideas of the target text, it omits several important details such as specific locations (Ahmednagar, Buldhana, and Akola districts), the involvement of various agencies, and the detailed statistics and studies mentioned in the target text.\n\n4. Conformity to Template: The generated text generally conforms to the template but is less detailed and comprehensive compared to the target text. It misses finer points like the exact technology standards, the role of different organizations, and the detailed pre-project scenario.\n\nGiven these points, the generated text is clear and well-structured but lacks the depth and specificity of the target text.",
+            "score": 0.675
+        },
+        "1.2": {
+            "reason": "The generated text is fluent and grammatically correct, but it diverges significantly from the target text in terms of content and structure. The target text specifies a particular sectoral scope and methodology used, and it clearly states that the project is not a grouped project and is non-AFLOU. The generated text, while well-written, does not include these specific details and instead provides a general description of sectoral scope and project activity type under the VCS Program. Furthermore, the generated text does not conform to the writing template, which requires completing a table with specific information rather than providing a detailed narrative.",
+            "score": 0.3
+        },
+        "1.3": {
+            "reason": "The generated text is fluent and grammatically correct. It comprehensively covers the key content of the target text, including the replacement of traditional cook stoves with improved cook stoves, their respective combustion efficiencies, and the energy savings achieved. The text also addresses the inclusion under the VCS Program scope, compliance with deadlines, eligibility of the applied methodology, and other relevant eligibility information. However, it introduces some additional details not present in the target text, such as specific deadlines and project approval from the Heavy Mechanical Engineering Division Council, which might not be relevant. Nonetheless, it adheres well to the writing template and provides a structured justification for the project's eligibility.",
+            "score": 0.85
+        },
+        "1.4": {
+            "reason": "The generated text by the model is fluent and grammatically correct. It provides a clear description of the project configuration, indicating that it spans multiple locations rather than being a single location or a grouped project. However, it lacks some specific key content from the target text, such as the mention of BPL and Scheduled Tribes households, the specific districts involved, the signed Tripartite Agreement, and the specific greenhouse gas emission reduction figure. While the generated text conforms to the writing template, it misses these critical details which are necessary for a comprehensive understanding of the project.",
+            "score": 0.625
+        },
+        "1.5": {
+            "reason": "The generated text deviates significantly from the target text in several key areas. Although it maintains fluency and correct grammar, it fails to include crucial contact details such as the contact person, telephone number, and email address. Additionally, it does not conform to the simple table format specified in the template requirement. Instead, it adds unnecessary sections and explanations, which are not part of the original requirement.",
+            "score": 0.3
+        },
+        "1.6": {
+            "reason": "The generated text is fluent and grammatically correct, but it significantly deviates from the template and target text requirements. The generated text includes additional roles and responsibilities that are not in the target text and does not follow the simple table format provided in the target text. The contact information is incomplete, with several 'Unknown' entries, which does not meet the requirement of providing complete contact information. The generated text also includes additional notes and an extra table, which are not part of the template requirement.",
+            "score": 0.3
+        },
+        "1.7": {
+            "reason": "The generated text is fluent and grammatically correct. It includes the key content from the target text, such as the definition of project ownership, the involvement of G K Energy Marketers Pvt Ltd, Vikram Stoves, and the end users, as well as the legal agreements and authorizations. The generated text also conforms well to the writing template by providing a structured and detailed explanation of project ownership. However, it introduces additional details and sections not present in the target text, which might slightly deviate from the original requirement's brevity and focus.",
+            "score": 0.75
+        },
+        "1.8": {
+            "reason": "The generated text is fluent and grammatically correct, which contributes positively to the overall score. However, it deviates significantly from the target text in terms of key content and structure. While the target text provides detailed information about the project start date in the context of improved cook stove usage and the specific criteria of the VCS and CDM standards, the generated text focuses more on general justifications and does not capture the specifics about the handover of cookstoves to beneficiaries or the exact alignment with the CDM-PDD. Additionally, the generated text introduces new elements like 'punctuality' and a deadline of '04-February-2021', which are not mentioned in the target text. Although it loosely follows the template requirement, the generated text does not adequately mirror the depth and specific details provided in the target text.",
+            "score": 0.55
+        },
+        "1.9": {
+            "reason": "The generated text by the model is fluent and grammatically correct. However, there are discrepancies in the dates provided for the crediting period, which do not match the target text. The generated text also includes additional information that was not present in the target text, such as the emphasis on the project's commitment to emission reduction and environmental sustainability. While the writing style conforms to a formal template, the inclusion of extra content and incorrect dates detracts from its accuracy in reflecting the key content of the target text.",
+            "score": 0.55
+        },
+        "1.10": {
+            "reason": "The generated text is quite close to the target text in terms of content and structure. It includes all the key elements such as the classification of the project as small-scale, the annual and total GHG emission reductions, and the number of crediting years. However, there are some minor differences. The generated text uses a different format for presenting the years and does not specify the exact dates as in the target text. Moreover, the generated text includes additional sections like 'Total Estimated ERRs during the First or Fixed Crediting Period' and 'Total Number of Years in the First or Fixed Crediting Period', which are not explicitly required by the template but still align with the overall structure. The fluency and grammar are excellent, and the text conforms well to the writing template. Therefore, it is rated as outstanding with minor deviations.",
+            "score": 0.875
+        },
+        "1.11": {
+            "reason": "The generated text is fluent and grammatically correct, which is a positive aspect. However, it lacks detailed information on the age and average lifetime of the equipment, specific materials used, and the exact components involved in the manufacturing process. It also does not include a comparison with the baseline scenario, which is a critical part of the requirement. Additionally, the generated text does not follow the template requirement to provide a comprehensive list and arrangement of the main manufacturing/production technologies, systems, and equipment involved. It does mention the start date of the project and the responsible manufacturer, which is useful but not sufficient to meet the template's detailed requirements.",
+            "score": 0.45
+        },
+        "1.12": {
+            "reason": "The generated text is fluent and grammatically correct. It includes key content from the target text, such as the location in Maharashtra, India, and geodetic coordinates for Ahmednagar, Buldhana, and Akola. However, it lacks detailed village-level information and specific coordinates for Amravati, which are present in the target text. The generated text conforms to the writing template by clearly indicating the project location and geographic boundaries, but it is less comprehensive in terms of specific details compared to the target text.",
+            "score": 0.65
+        },
+        "1.13": {
+            "reason": "The generated text is fluent and grammatically correct, which is a positive aspect. However, it lacks the depth and specific details provided in the target text. The target text includes specific data, references to studies, and detailed calculations, which are crucial for demonstrating the conditions prior to project initiation and the baseline scenario. The generated text is more of a high-level summary and does not incorporate these key content elements. Additionally, the generated text does not fully conform to the writing template as it does not explicitly refer to the methodology or include detailed calculations and references as required.",
+            "score": 0.45
+        },
+        "1.14": {
+            "reason": "The generated text is fluent and grammatically correct, demonstrating a good command of language. It includes key content from the target text, such as compliance with the Forest Conservation Act, the National Forest Policy, and Maharashtra State Government measures. However, it lacks specific details about the depletion of carbon stocks, the impact on fuel wood prices, and the certification by the Bureau of Indian Standards. It also introduces additional content not present in the target text, such as Environmental Impact Assessment and labor laws, which could be seen as either enhancing or diluting the focus, depending on the context. The generated text conforms to the writing template by clearly structuring information under relevant subheadings.",
+            "score": 0.73
+        },
+        "1.15": {
+            "reason": "The generated text by the model is quite detailed and includes much of the key content from the target text. However, there are some discrepancies and additions that are not present in the target text. For instance, the target text does not mention the project inactivity date or the active status explicitly. The generated text also includes an attestation requirement that is not found in the target text. Despite these differences, the generated text is fluent and grammatically correct. It adheres to the template requirement to a good extent but deviates slightly in structure and content inclusion.",
+            "score": 0.723
+        },
+        "1.16": {
+            "reason": "The generated text does not align with the target text in terms of content and structure. The target text discusses specific compliance and registration details related to emissions trading programs and environmental credits for a project in India. The generated text, however, focuses on alternative credit options for clean cooking technologies, which is entirely different in subject matter. Therefore, the generated text does not include any of the key content from the target text and does not conform to the writing template. The fluency and grammar of the generated text are good, but they are irrelevant to the comparison criteria in this context.",
+            "score": 0.0
+        },
+        "2.1": {
+            "reason": "The generated text is fluent and grammatically correct, showcasing a high level of coherence and structure. However, it diverges significantly from the target text in terms of content. The target text is a specific statement from the Ministry of Environment and Forests about the non-requirement of an environmental impact assessment for a particular project, while the generated text is a detailed discussion on the 'No Net Harm' principle in project execution. The generated text does not adhere to the template requirement and lacks the key content of the target text, which is a concise regulatory statement. Therefore, despite its quality in language and structure, it does not meet the content and template conformity criteria.",
+            "score": 0.2
+        },
+        "2.2": {
+            "reason": "The generated text does not meet any of the key requirements outlined in the target text. It fails to reference sections E 1, E 2, and E 3 of the PDD of the UNFCCC registered CDM project with reference no. 8771. Additionally, it does not provide the web link to the mentioned project. Instead, the generated text focuses on local stakeholder consultation, which is irrelevant to the target text's content. While the generated text is fluent and grammatically correct, it completely misses the key content and does not conform to the writing template provided.",
+            "score": 0.0
+        },
+        "2.3": {
+            "reason": "The generated text is fluent and grammatically correct, demonstrating a good command of language. However, it does not adhere to the template requirement or include the key content of the target text, which is a reference to a specific UNFCCC registered CDM project with a provided web link. The generated text diverges significantly from the target text's content and purpose.",
+            "score": 0.2
+        },
+        "2.4": {
+            "reason": "The generated text is highly fluent and grammatically correct. It captures the key content of the target text, including the dates of the public comment period and the lack of comments received. It also follows the template requirement by summarizing the actions taken (or lack thereof) due to the absence of comments. The addition of a conclusion section, while not strictly necessary, helps to reinforce the points made and provides a comprehensive summary. Overall, the generated text is detailed and aligns well with the template requirement.",
+            "score": 0.94
+        },
+        "2.5": {
+            "reason": "The generated text is highly detailed and well-structured, adhering closely to a comprehensive template. The fluency and grammar are excellent, with clear and coherent sentences throughout. The text includes a wide range of key content relevant to AFOLU-specific safeguards, covering environmental, social, and economic aspects comprehensively. It also conforms to the writing template, with organized sections and subsections. However, there is no target text provided for direct comparison, which slightly limits the evaluation context.",
+            "score": 0.95
+        },
+        "3.1": {
+            "reason": "The generated text demonstrates good fluency and grammar. However, it deviates significantly from the target text by including additional sections (Tool, Module, and Notes) that were not present in the target text. The target text is concise and directly addresses the template requirements, while the generated text introduces unnecessary information and fails to match the specific content of the target text. Furthermore, the generated text does not conform to the writing template as closely as required, particularly in terms of the version number and the exact title of the methodology.",
+            "score": 0.35
+        },
+        "3.2": {
+            "reason": "The generated text is fluent and grammatically correct. However, it lacks the specific key content found in the target text, such as detailed explanations of how the project meets each applicability condition and specific evidence supporting these claims. The generated text follows the template but is too generic and placeholder-like, failing to provide the necessary details and examples that are present in the target text. Therefore, while the structure is correct, the content is insufficient.",
+            "score": 0.35
+        },
+        "3.3": {
+            "reason": "The generated text is fluent and grammatically correct. It covers key aspects such as defining the project boundary, identifying GHG sources for both baseline and project scenarios, and mentioning potential leakage. However, it diverges significantly from the target text in structure and content. The target text is concise and specific to the methodology and geographical locations, whereas the generated text includes additional sections and a more general explanation. The generated text also does not fully conform to the template requirement, particularly in providing a detailed diagram or map of the project boundary. Therefore, while the generated text is informative and well-written, it does not align closely enough with the target text or template requirement.",
+            "score": 0.55
+        },
+        "3.4": {
+            "reason": "The model's generated text is fluent and grammatically correct, demonstrating a clear structure and logical flow. It includes key content such as the identification and justification of the baseline scenario, the procedure for identifying the baseline scenario, key assumptions and rationale, methodological choices, and references. However, it deviates from the target text by providing a detailed description instead of simply referring to the PDD section and providing a link. The generated text conforms to the writing template but adds more information than required. This additional information, while useful, is not aligned with the simplicity of the target text.",
+            "score": 0.75
+        },
+        "3.5": {
+            "reason": "The generated text is highly detailed and follows the template requirement closely. It covers all the necessary aspects, including Regulatory Surplus, Additionality Methods, Performance Benchmark Metric, Conformance with Positive List, and Reproducibility of Additionality Analysis. The fluency and grammar are excellent, and the text is well-structured. However, it goes beyond the simplicity of the target text, which only provides a reference to section B5 of the PDD and a link. The generated text includes additional details that were not requested in the target text, which slightly deviates from the requirement of providing a direct reference. Hence, it does not fully conform to the writing template.",
+            "score": 0.75
+        },
+        "3.6": {
+            "reason": "The generated text is fluent and grammatically correct, but it significantly deviates from the target text's content and purpose. The target text explicitly states that there are no methodological deviations, whereas the generated text describes several deviations in detail. This discrepancy indicates that the generated text does not include the key content of the target text or conform to the writing template, which specifically requires addressing any methodology deviations if they exist.",
+            "score": 0.2
+        },
+        "4.1": {
+            "reason": "The generated text is fluent and grammatically correct, demonstrating a clear understanding of the procedure for quantifying baseline emissions and carbon stock changes. It includes key content such as the systematic approach to determining baseline emissions, the formula for emission reductions, and the importance of justifying methodological choices. However, it does not provide the specific reference to section B 6.1 of PDD of the UNFCCC registered CDM project with reference no. 8771 or the web link, which are crucial elements in the target text. Additionally, while the generated text conforms to the writing template, it lacks the inclusion of all relevant equations and detailed procedural steps that would allow the reader to reproduce the calculations. Therefore, it scores well on fluency and grammar but falls short on completeness and adherence to the exact template requirements.",
+            "score": 0.55
+        },
+        "4.2": {
+            "reason": "The generated text is fluent and grammatically correct, which is a positive aspect. However, it diverges significantly from the target text in terms of key content and adherence to the writing template. The target text is concise and directs the reader to an external source for detailed information, while the generated text provides an extensive explanation and includes specific equations, which the template does not require. Additionally, the generated text does not mention the necessity of including all calculations in the emission reduction and removal calculation spreadsheet. Therefore, while the generated text is informative, it does not conform to the target text's brevity and specific instruction to refer to an external document.",
+            "score": 0.35
+        },
+        "4.3": {
+            "reason": "The generated text is comprehensive and follows the template requirement closely. It provides a detailed procedure for quantifying leakage emissions, includes relevant equations, and offers sufficient information for reproducing the calculations. The text is fluent and grammatically correct. However, it deviates from the target text, which simply refers to a specific section of a UNFCCC registered CDM project document and provides a web link for further details. The generated text does not conform to this straightforward referencing approach, which was specified in the target text.",
+            "score": 0.5
+        },
+        "4.4": {
+            "reason": "The generated text is clear and well-organized, demonstrating good fluency and grammar. It includes a detailed description of the procedure for quantifying GHG emission reductions and carbon dioxide removals, along with relevant equations and sample calculations. However, it diverges from the target text in terms of content and structure, as the target text provides specific data in a tabular format directly referencing a specific UNFCCC project and its web link. The generated text does not fully align with the target text's structure and specific data requirements. Therefore, while the generated text is informative and well-written, it does not completely meet the template requirement of closely mirroring the target text.",
+            "score": 0.55
+        },
+        "5.1": {
+            "reason": "The generated text is fluent and grammatically correct. It includes key content such as the reference to section B 6.2 of the PDD for the UNFCCC registered CDM project with reference no. 8771, and it provides a detailed explanation of data/parameters, their sources, and justifications. However, it deviates significantly from the template requirement by adding extra details and not adhering strictly to the provided format. While it is comprehensive and informative, it does not conform to the concise and specific structure requested in the template.",
+            "score": 0.65
+        },
+        "5.2": {
+            "reason": "The generated text is fluent and grammatically correct. It includes key content such as referring to the data and parameters to be monitored during the project crediting period and provides a link to the UNFCCC CDM Project 8771. However, it diverges from the template requirement by not explicitly completing the table with specific data and parameters. The target text directly refers to a section of the PDD, which is more aligned with the template's instruction to complete the table using referenced data. The generated text does not conform to the template's requirement to provide detailed entries for each data/parameter, which is a significant deviation.",
+            "score": 0.45
+        },
+        "5.3": {
+            "reason": "The generated text is very similar to the target text in terms of structure and content. However, there are discrepancies in the reference number and the web link, which are key content elements. Both texts are fluent and grammatically correct, but the generated text does not fully conform to the target text's specifics. The organizational structure, responsibilities, and other detailed aspects required by the template are not addressed in either text, but this seems to be a characteristic of the target text itself. Therefore, the generated text is evaluated primarily on its accuracy and adherence to the provided target text.",
+            "score": 0.5
+        },
+        "final": 0.5167058823529411
+    }
+}
