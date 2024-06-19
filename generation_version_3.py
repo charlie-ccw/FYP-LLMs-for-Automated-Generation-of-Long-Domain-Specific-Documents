@@ -9,7 +9,7 @@ import os.path
 
 from langchain_core.documents import Document
 
-from generation_version_2 import generation_version_2
+from globalParameter.parameters import DOMAIN
 from tools.retrieval_refine_with_target_text_tool import RetrievalRefineWithTargetTextTool
 from util.chroma_db_util import ChromaDBUtil
 
@@ -23,7 +23,7 @@ async def generation_version_3(file_name_without_extension: str, base_version: s
         doc_template = json.load(f)
 
     # Load the draft generations for current file
-    draft_file_path = os.path.join(f"generated_file/version_{base_version}", f"{file_name_without_extension}.json")
+    draft_file_path = os.path.join(f"generated_file/{DOMAIN}/version_{base_version}", f"{file_name_without_extension}.json")
     # Check and Get the draft version of file
     if not os.path.isfile(draft_file_path):
         print(f"---------- ERROR ---------- The previous base version {base_version} of {file_name_without_extension} is None")
@@ -32,7 +32,7 @@ async def generation_version_3(file_name_without_extension: str, base_version: s
         draft_file = json.load(f)
 
     # Load the target file extraction for current file to retrieve golden sample
-    target_file_path = os.path.join('file/Energy_demand_extract/structure_1', f"{file_name_without_extension}.json")
+    target_file_path = os.path.join(f'file/{DOMAIN}_extract/structure_1', f"{file_name_without_extension}.json")
     with open(target_file_path, 'r', encoding='utf-8') as f:
         target_file = json.load(f)
 
@@ -40,8 +40,8 @@ async def generation_version_3(file_name_without_extension: str, base_version: s
     retrieval_refine_with_target_text_tool = RetrievalRefineWithTargetTextTool()
 
     # Get generation in the past
-    if os.path.isfile(f"generated_file/version_3_{base_version}/{file_name_without_extension}.json"):
-        with open(f"generated_file/version_3_{base_version}/{file_name_without_extension}.json", 'r', encoding='utf-8') as f:
+    if os.path.isfile(f"generated_file/{DOMAIN}/version_3_{base_version}/{file_name_without_extension}.json"):
+        with open(f"generated_file/{DOMAIN}/version_3_{base_version}/{file_name_without_extension}.json", 'r', encoding='utf-8') as f:
             file_generation = json.load(f)
     else:
         file_generation = {}
@@ -96,7 +96,7 @@ async def generation_version_3(file_name_without_extension: str, base_version: s
                 }
 
     # Write into correct JSON file
-    with open(f"generated_file/version_3_{base_version}/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
+    with open(f"generated_file/{DOMAIN}/version_3_{base_version}/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
         json.dump(file_generation, f, indent=4)
 
 
@@ -117,7 +117,7 @@ def build_the_train_knowledge_bases(train_files: list[str]):
     # Start iteration and store section infos of each file into sections_knowledge for building knowledge bases
     for train_file in train_files:
         # Set the file path and Load the extracted infos
-        file_path = os.path.join("file/Energy_demand_extract/structure_1", f"{train_file}.json")
+        file_path = os.path.join(f"file/{DOMAIN}_extract/structure_1", f"{train_file}.json")
         with open(file_path, 'r', encoding='utf-8') as f:
             train_datas = json.load(f)
         # Store each section info into specific item of sections_knowledge
@@ -136,10 +136,10 @@ def build_the_train_knowledge_bases(train_files: list[str]):
 
 
 async def main():
-    base_version = '6'
-    os.makedirs(f"generated_file/version_3_{base_version}", exist_ok=True)
+    base_version = '5'
+    os.makedirs(f"generated_file/{DOMAIN}/version_3_{base_version}", exist_ok=True)
     # Load the train and test files with summary
-    train_test_file_path = "project_template/template_version_1_summary.json"
+    train_test_file_path = f"project_template/template_version_1_{DOMAIN}_summary.json"
     with open(train_test_file_path, 'r', encoding='utf-8') as f:
         train_test_datasets = json.load(f)
 

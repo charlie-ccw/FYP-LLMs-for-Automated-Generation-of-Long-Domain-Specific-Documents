@@ -5,11 +5,12 @@ we need to analyze the structure of the historical PDF documents to determine th
 import json
 import os
 
+from globalParameter.parameters import DOMAIN
 from pdf_analysis.utils import extract_text_from_pdf, extract_structure_from_text
 
 # Set the folder we want to process
-folder_70 = "../file/FYP_Golden_Documents/Energy_demand/70"
-folder_80 = "../file/FYP_Golden_Documents/Energy_demand/80"
+folder_70 = f"../file/FYP_Golden_Documents/{DOMAIN}/70"
+folder_80 = f"../file/FYP_Golden_Documents/{DOMAIN}/80"
 # Get all files
 files = os.listdir(folder_70)
 files += os.listdir(folder_80)
@@ -17,7 +18,7 @@ files += os.listdir(folder_80)
 structures = {}
 for file in files:
     # get the file path and extract contents text from each file
-    file = os.path.join('../file/FYP_Documents/Energy_demand', file)
+    file = os.path.join(f'../file/FYP_Documents/{DOMAIN}', file)
     text = extract_text_from_pdf(file, 1)
     text += extract_text_from_pdf(file, 2)
     text += extract_text_from_pdf(file, 3)

@@ -9,6 +9,7 @@ import asyncio
 import json
 import os.path
 
+from globalParameter.parameters import DOMAIN
 from util.evaluation_matrix import calculate_BLEU, calculate_METEOR, calculate_METEOR_of_summary, calculate_ROUGE, \
     calculate_Embedding_similarity_of_consine, calculate_GPT_SELF_EVALUATION
 
@@ -17,8 +18,8 @@ async def evaluate_generated_file(file_name_without_extension: str, generation_v
     print(f">>>>>>>>>>>>>>> {file_name_without_extension} <<<<<<<<<<<<<<< Evaluation")
     # Set the File Path for generation, target and template file
     template_file_path = 'project_template/template_version_1.json'
-    generated_file_path = f'generated_file/version_{generation_version}/{file_name_without_extension}.json'
-    target_file_path = f'file/Energy_demand_extract/structure_1/{file_name_without_extension}.json'
+    generated_file_path = f'generated_file/{DOMAIN}/version_{generation_version}/{file_name_without_extension}.json'
+    target_file_path = f'file/{DOMAIN}_extract/structure_1/{file_name_without_extension}.json'
 
     # Load the Template requirement
     with open(template_file_path, 'r', encoding='utf-8') as f:
@@ -122,14 +123,14 @@ async def evaluate_generated_file(file_name_without_extension: str, generation_v
     evaluation_matrix['GPT_SELF_EVALUATION'] = gpt_self_evaluation_result
 
     # Save scores
-    with open(f"evaluation_result/version_{generation_version}/{file_name_without_extension}.json", 'w',
+    with open(f"evaluation_result/{DOMAIN}/version_{generation_version}/{file_name_without_extension}.json", 'w',
               encoding='utf-8') as f:
         json.dump(evaluation_matrix, f, indent=4)
 
 
 async def main():
     # Load the train and test files with summary
-    train_test_file_path = "project_template/template_version_1_summary.json"
+    train_test_file_path = f"project_template/template_version_1_{DOMAIN}_summary.json"
     with open(train_test_file_path, 'r', encoding='utf-8') as f:
         train_test_datasets = json.load(f)
 
@@ -140,11 +141,11 @@ async def main():
     generation_versions = ['1', '2', '4', '5', '6', '3_1', '3_2', '3_4', '3_5', '3_6']
 
     for generation_version in generation_versions:
-        os.makedirs(f"evaluation_result/version_{generation_version}", exist_ok=True)
+        os.makedirs(f"evaluation_result/{DOMAIN}/version_{generation_version}", exist_ok=True)
         print(
             f"============================================================ {generation_version} ============================================================")
         tasks = []
-        already_done_files = os.listdir(f"evaluation_result/version_{generation_version}")
+        already_done_files = os.listdir(f"evaluation_result/{DOMAIN}/version_{generation_version}")
         # Start iteration and evaluate each generation of specific version
         for idx, test_dataset in enumerate(test_datasets):
             file_name_without_extension = test_dataset['file_name']

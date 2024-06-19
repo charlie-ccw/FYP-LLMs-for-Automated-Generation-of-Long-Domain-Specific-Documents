@@ -6,11 +6,13 @@ import os
 
 from langchain_core.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 from langchain_core.messages import SystemMessage
+
+from globalParameter.parameters import DOMAIN
 from prompt.prompt_of_generation_with_template_only import GENERATION_WITH_TEMPLATE_ONLY_SYSTEM, GENERATION_WITH_TEMPLATE_ONLY_PROMPT
 from util.prompt_based_generation import prompt_based_generation
 
 if __name__ == "__main__":
-    os.makedirs("generated_file/version_1", exist_ok=True)
+    os.makedirs(f"generated_file/{DOMAIN}/version_1", exist_ok=True)
 
     # Set up the Message Template for generation
     chat_template = ChatPromptTemplate.from_messages(
@@ -21,7 +23,7 @@ if __name__ == "__main__":
     )
 
     # Load the train and test files with summary
-    train_test_file_path = "project_template/template_version_1_summary.json"
+    train_test_file_path = f"project_template/template_version_1_{DOMAIN}_summary.json"
     with open(train_test_file_path, 'r', encoding='utf-8') as f:
         train_test_datasets = json.load(f)
 
@@ -65,7 +67,7 @@ if __name__ == "__main__":
                 }
 
         # Write into correct JSON file
-        with open(f"generated_file/version_1/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
+        with open(f"generated_file/{DOMAIN}/version_1/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
             json.dump(file_generation, f, indent=4)
 
 

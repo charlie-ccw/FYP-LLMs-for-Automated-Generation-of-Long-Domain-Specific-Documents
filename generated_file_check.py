@@ -29,7 +29,7 @@ def check_generated_structure(file: str):
 
 
 
-generation_folder = "generated_file"
+generation_folder = "generated_file/Energy_demand"
 generation_version_folders = os.listdir(generation_folder)
 for version in generation_version_folders:
     generated_files = os.listdir(os.path.join(generation_folder, version))

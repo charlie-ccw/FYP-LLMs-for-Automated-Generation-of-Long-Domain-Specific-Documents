@@ -10,6 +10,7 @@ from langchain_core.prompts import ChatPromptTemplate, HumanMessagePromptTemplat
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from agent.key_info_retrieval_agent import get_key_info_retrieval_agent
+from globalParameter.parameters import DOMAIN
 from prompt.prompt_of_generation_with_template_and_key_info import GENERATION_WITH_TEMPLATE_AND_KEY_INFO_SYSTEM, \
     GENERATION_WITH_TEMPLATE_AND_KEY_INFO_PROMPT
 from util.chroma_db_util import ChromaDBUtil
@@ -38,8 +39,8 @@ async def generation_version_5(file_name_without_extension: str):
     build_version_5_knowledge_base(file_name_without_extension=file_name_without_extension)
 
     # Get generation in the past
-    if os.path.isfile(f"generated_file/version_5/{file_name_without_extension}.json"):
-        with open(f"generated_file/version_5/{file_name_without_extension}.json", 'r', encoding='utf-8') as f:
+    if os.path.isfile(f"generated_file/{DOMAIN}/version_5/{file_name_without_extension}.json"):
+        with open(f"generated_file/{DOMAIN}/version_5/{file_name_without_extension}.json", 'r', encoding='utf-8') as f:
             file_generation = json.load(f)
     else:
         file_generation = {}
@@ -97,7 +98,7 @@ NOTE: You need to extract key questions as many as possible and use tool to do r
             }
 
             # Write into correct JSON file every section
-            with open(f"generated_file/version_5/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
+            with open(f"generated_file/{DOMAIN}/version_5/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
                 json.dump(file_generation, f, indent=4)
 
 
@@ -107,7 +108,7 @@ def build_version_5_knowledge_base(file_name_without_extension: str):
         return
     print(f"No knowledge base, start to build one for {file_name_without_extension}")
     # Set up the origin file path
-    file_path = os.path.join("file/Energy_demand/structure_1", f"{file_name_without_extension}.pdf")
+    file_path = os.path.join(f"file/{DOMAIN}/structure_1", f"{file_name_without_extension}.pdf")
     # Create pdfloader to extract info from pdf
     loader = PyMuPDFLoader(file_path)
     # Load context
@@ -161,9 +162,9 @@ def build_version_5_knowledge_base(file_name_without_extension: str):
 
 
 async def main():
-    os.makedirs("generated_file/version_5", exist_ok=True)
+    os.makedirs(f"generated_file/{DOMAIN}/version_5", exist_ok=True)
     # Load  the train and test files with summary
-    train_test_file_path = "project_template/template_version_1_summary.json"
+    train_test_file_path = f"project_template/template_version_1_{DOMAIN}_summary.json"
     with open(train_test_file_path, 'r', encoding='utf-8') as f:
         train_test_datasets = json.load(f)
 

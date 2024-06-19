@@ -12,6 +12,8 @@ import asyncio
 import os
 import json
 import logging
+
+from globalParameter.parameters import DOMAIN
 from util.openai_api_for_pdf_extract import encode_image, aget_openai_response
 
 # Set up the logging
@@ -24,8 +26,8 @@ logging.basicConfig(level=logging.WARNING,
 # Define the main program
 async def main():
     # Set the picture folder (contains the picture of each single page) and content folder (contains the correct content info)
-    picture_folder = "../file/Energy_demand_picture/structure_1"
-    content_folder = "../file/Energy_demand_content/structure_1"
+    picture_folder = f"../file/{DOMAIN}_picture/structure_1"
+    content_folder = f"../file/{DOMAIN}_content/structure_1"
     # Get full files inside content folder
     files = os.listdir(content_folder)
 
@@ -34,6 +36,7 @@ async def main():
         file_data = {}
         # Get the file name without extension
         file_name_without_extension = os.path.splitext(file)[0]
+        print(f"-------------------- {file_name_without_extension} --------------------")
         # Record the progress
         logging.warning(
             f"\n\n\n>>>>>>>>>>>>>>>>>>>> Trying to extract data from file: '{file_name_without_extension}' <<<<<<<<<<<<<<<<<<<< {idx}/{len(files)}")
@@ -165,7 +168,8 @@ async def main():
                 f"---------- PLEASE CHECK THE DATA OF THIS FILE ---------- section not processed {sorted_section_ids}")
 
         # store the file data
-        with open(f'../file/Energy_demand_extract/structure_1/{file_name_without_extension}.json', 'w', encoding='utf-8') as f:
+        os.makedirs(f"../file/{DOMAIN}_extract/structure_1", exist_ok=True)
+        with open(f'../file/{DOMAIN}_extract/structure_1/{file_name_without_extension}.json', 'w', encoding='utf-8') as f:
             json.dump(file_data, f, indent=4)
 
 

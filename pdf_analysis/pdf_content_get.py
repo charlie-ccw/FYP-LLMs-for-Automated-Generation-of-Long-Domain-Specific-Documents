@@ -7,10 +7,12 @@ Note:
 """
 import os
 import json
+
+from globalParameter.parameters import DOMAIN
 from pdf_analysis.utils import extract_structure_from_text, extract_text_from_pdf, get_pdf_page_count
 
 # Set the file folder path
-folder = "../file/Energy_demand/structure_1"
+folder = f"../file/{DOMAIN}/structure_1"
 # Get all files inside file folder
 files = os.listdir(folder)
 
@@ -80,6 +82,7 @@ for file in files:
     }
     # Store the correct content for current file
     file_name_without_extension = os.path.splitext(file)[0]
-    with open(f'../file/Energy_demand_content/structure_1/{file_name_without_extension}.json', 'w', encoding='utf-8') as f:
+    os.makedirs(f"../file/{DOMAIN}_content/structure_1", exist_ok=True)
+    with open(f'../file/{DOMAIN}_content/structure_1/{file_name_without_extension}.json', 'w', encoding='utf-8') as f:
         json.dump(structure_final, f, indent=4)
 

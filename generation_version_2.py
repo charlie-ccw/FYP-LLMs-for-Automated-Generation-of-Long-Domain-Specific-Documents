@@ -8,6 +8,8 @@ import json
 import os
 from langchain_core.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 from langchain_core.messages import SystemMessage
+
+from globalParameter.parameters import DOMAIN
 from prompt.prompt_of_generation_with_template_and_key_info import GENERATION_WITH_TEMPLATE_AND_KEY_INFO_SYSTEM, \
     GENERATION_WITH_TEMPLATE_AND_KEY_INFO_PROMPT
 from tools.retrieval_qa_tool import RetrievalQATool
@@ -37,7 +39,7 @@ async def generation_version_2(file_name_without_extension: str):
 
     # Build the knowledge base for core info retrieval
     retrieval_qa_tool = RetrievalQATool()
-    target_file_path = os.path.join("file/Energy_demand/structure_1", f"{file_name_without_extension}.pdf")
+    target_file_path = os.path.join(f"file/{DOMAIN}/structure_1", f"{file_name_without_extension}.pdf")
     chroma_util = ChromaDBUtil()
     chroma_util.initialise_vectorstore_with_files(persist_directory=f"version2/{file_name_without_extension}",
                                                   files=[target_file_path])
@@ -110,15 +112,15 @@ async def generation_version_2(file_name_without_extension: str):
             }
 
     # Write into correct JSON file
-    with open(f"generated_file/version_2/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
+    with open(f"generated_file/{DOMAIN}/version_2/{file_name_without_extension}.json", 'w', encoding='utf-8') as f:
         json.dump(file_generation, f, indent=4)
 
 
 async def main():
-    os.makedirs("generated_file/version_2", exist_ok=True)
+    os.makedirs(f"generated_file/{DOMAIN}/version_2", exist_ok=True)
 
     # Load the train and test files with summary
-    train_test_file_path = "project_template/template_version_1_summary.json"
+    train_test_file_path = f"project_template/template_version_1_{DOMAIN}_summary.json"
     with open(train_test_file_path, 'r', encoding='utf-8') as f:
         train_test_datasets = json.load(f)
 
