@@ -11,3 +11,6 @@ os.environ["LANGCHAIN_API_KEY"] = ""
 
 # Set up your model type
 MODEL = "gpt-3.5-turbo"
+
+# Set up your domain
+DOMAIN = "Energy_demand"
