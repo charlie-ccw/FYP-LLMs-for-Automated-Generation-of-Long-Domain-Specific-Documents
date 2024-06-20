@@ -62,3 +62,8 @@ This script evaluates the generated documents using various metrics such as BLEU
 ## Project Template Web
 https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fverra.org%2Fwp-content%2Fuploads%2F2024%2F04%2FVCS-Project-Description-Template-v4.4-FINAL2.docx&wdOrigin=BROWSELINK
 
+## Acknowledgements
+This project was supported by my mentor, [Dr. Pedro M. Baiz V.](https://profiles.imperial.ac.uk/p.m.baiz), and the [Verra organization](https://registry.verra.org/app/search/VCS), which provided historical gold-standard documents from various fields.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
